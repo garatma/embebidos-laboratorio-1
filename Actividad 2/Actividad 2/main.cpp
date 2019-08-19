@@ -2,7 +2,8 @@
 #include <util/delay.h>
 
 // variables
-int buttonState = 0;         // variable para leer el estado del pulsador
+// variable para leer el estado del pulsador
+int buttonState = 0;
 
 int main()
 {
@@ -16,10 +17,14 @@ int main()
 		//Leer el estado del pulsador
 		buttonState = PIND & (1<<PD2);
 
-		if(buttonState) { //Si el pulsador está apretado
+		if ( buttonState )
+		{
+			//Si el pulsador está apretado
 			//Encender el led
 			PORTB |= (1<<PB5);
-		} else {
+		}
+		else
+		{
 			//Apagar el led
 			PORTB &= ~(1<<PB5);
 		}

@@ -16,24 +16,20 @@
 #define LED_PORT PB5
 
 
-int main(void) {
+int main(void)
+{
+	// setea el numero de port como salida 
+	DDRB |= (1 << LED_PORT);
 
-	DDRB |= (1 << LED_PORT);  // setea el numero de port como salida
-
-	while (1) {
-
-
+	while (1)
+	{
 		PORTB |= (1 << LED_PORT);
-
 		// Espera
 		_delay_ms(10);
-
 
 		PORTB &= ~(1 << LED_PORT);
 
 		// Espera
 		_delay_ms(10);
-
-
 	}
 }
