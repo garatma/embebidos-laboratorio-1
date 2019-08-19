@@ -18,7 +18,7 @@
 
 int main(void)
 {
-	// setea el numero de port como salida 
+	// setea el numero de port como salida
 	DDRB |= (1 << LED_PORT);
 
 	while (1)
@@ -32,4 +32,5 @@ int main(void)
 		// Espera
 		_delay_ms(10);
 	}
+	return 0;
 }
