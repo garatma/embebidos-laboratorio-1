@@ -72,7 +72,7 @@ Actividad 5: Librerías de Arduino. Librería Serial
 Para usar las librerías externas de Arduino hay que agregar entradas adicionales para cada una, por ejemplo: c:/arduino/libraries/LiquidCrystal/AVR/GNU Linker → Libraries:
     • Agregar la librería libcoreArduinoUno.a para que linkee con ella. Si se usan algunas operaciones matemáticas puede hacer falta agregar la librería libm.a.
     • Agregar el directorio donde se encuentra la librería libcoreArduinoUno.a provista por la cátedra al Library Search Path.
-4. Estudiar la documentación de la librería “Serial” de Arduino [5]. En particular, analizar los ejemplos “Digital Read Serial”- [6] y “Digital Write Serial” [7]. Prestar especial atención al manejo de la librería Serial para lectura y escritura. Analizar qué recursos de hardware son utilizados por la librería y cómo influye ello en el diseño del software embebido.
+4. Estudiar la documentación de la librería “Serial” de Arduino [5]. En particular, analizar los ejemplos “Digital Read Serial”- [6] y “Diduino.hgital Write Serial” [7]. Prestar especial atención al manejo de la librería Serial para lectura y escritura. Analizar qué recursos de hardware son utilizados por la librería y cómo influye ello en el diseño del software embebido.
 5. Modificar el programa desarrollado en la Actividad 4 para que cambie el modo de operación del led según un número leído desde entrada Serie:
     (1) encendido,
     (2) titilando a 0.5 Hz,
