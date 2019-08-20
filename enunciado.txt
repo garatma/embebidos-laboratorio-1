@@ -79,7 +79,8 @@ Para usar las librerías externas de Arduino hay que agregar entradas adicionale
     (3) titilando a 1 Hz,
     (4) titilando a 2 Hz,
     (5) medio segundo encendido y un segundo apagado,
-    (6) apagado, y muestre por la salida Serie la frecuencia a la que titila.
+    (6) apagado, 
+y muestre por la salida Serie la frecuencia a la que titila.
 6. Construir el proyecto, descargar la imagen al microcontrolador y probarlo.
 7. Abrir el monitor serial en el host (el que sea que usemos) y asegurarse de que la tasa de transferencia (bps) coincida con la indicada en la inicialización de la librería Serial en el firmware descargado.
 
