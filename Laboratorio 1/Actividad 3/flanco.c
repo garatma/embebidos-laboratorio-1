@@ -9,15 +9,15 @@
 #include <avr/io.h>
 #include <util/delay.h>
 
-// Variables:
+// variables:
 int buttonState;
 int lastButtonState = 0;
 
 int main()
 {
-	//Inicializar el pin del pulsador como entrada
+	// inicializar el pin del pulsador como entrada.
 	DDRD &= ~(1<<DDD2);
-	//Inicializar el pin del led como salida
+	// inicializar el pin del led como salida.
 	DDRB |= (1<<DDB5);
 
 	while (1)
@@ -25,17 +25,17 @@ int main()
 		//Leer el estado del pulsador
 		buttonState = PIND & (1<<PD2);
 
-		//Si cambió el estado del pulsador...
+		// si cambió el estado del pulsador...
 		if (buttonState != lastButtonState)
 		{
-			//Si no está presionado el pulsador (se detectó un keyup)...
+			// si no está presionado el pulsador (se detectó un keyup)...
 			if (!buttonState)
 			{
-				//Se modifica el estado del led (toggle vía XOR)
+				// se modifica el estado del led (toggle vía XOR).
 				PORTB ^= (1<<PB5);
 			}
 
-			//Si hubo cambios válidos actualizo el valor de lectura anterior
+			// si hubo cambios válidos actualizo el valor de lectura anterior.
 			lastButtonState = buttonState;
 		}
 	}
