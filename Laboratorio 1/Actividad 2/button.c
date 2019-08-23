@@ -2,7 +2,7 @@
 #include <util/delay.h>
 
 // variables:
-int estado_boton = 0;	//  para leer el estado del pulsador.
+int8_t estado_boton = 0;	//  para leer el estado del pulsador.
 
 int main()
 {
