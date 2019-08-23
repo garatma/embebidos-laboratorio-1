@@ -2,9 +2,9 @@
 #include <util/delay.h>
 
 // variables:
-int estado_boton = 0;	// para leer el estado del pulsador.
+int8_t estado_boton = 0;	// para leer el estado del pulsador.
 
-int main()
+void main()
 {
 	// inicializar el pin del pulsador como salida para poder controlarlo.
 	DDRD |= (1<<DDD2);
@@ -32,5 +32,4 @@ int main()
 			PORTD |= (1<<PD2);
 		}
 	}
-	return 0;
 }
