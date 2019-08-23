@@ -1,5 +1,3 @@
-// --------------------------------- flanco.c ----------------------------------
-
 /*
  Código AVR de ejemplo para detectar un flanco
  Se utiliza el hardware del ejemplo Button de Arduino
@@ -10,8 +8,8 @@
 #include <util/delay.h>
 
 // variables:
-int buttonState;
-int lastButtonState = 0;
+int estado_boton,
+    ultimo_estado_boton = 0;
 
 int main()
 {
@@ -23,20 +21,20 @@ int main()
 	while (1)
 	{
 		//Leer el estado del pulsador
-		buttonState = PIND & (1<<PD2);
+		estado_boton = PIND & (1<<PD2);
 
 		// si cambió el estado del pulsador...
-		if (buttonState != lastButtonState)
+		if (estado_boton != ultimo_estado_boton)
 		{
 			// si no está presionado el pulsador (se detectó un keyup)...
-			if (!buttonState)
+			if (!estado_boton)
 			{
 				// se modifica el estado del led (toggle vía XOR).
 				PORTB ^= (1<<PB5);
 			}
 
 			// si hubo cambios válidos actualizo el valor de lectura anterior.
-			lastButtonState = buttonState;
+			ultimo_estado_boton = estado_boton;
 		}
 	}
 	return 0;

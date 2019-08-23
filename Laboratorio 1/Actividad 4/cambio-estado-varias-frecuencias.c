@@ -3,10 +3,10 @@
 #include <util/delay.h>
 
 // variables:
-int buttonState;            // estado del botón.
-int lastButtonState = 0;    // último estado del botón (para detectar cambios).
-int operacion = 1;          // cómo ciclar el led.
-int interrupcion = 0;       // detecta si, al esperar, se pulsa el botón.
+int estado_boton,               // estado del botón.
+    ultimo_estado_boton = 0,    // para detectar cambios.
+    operacion = 1,              // cómo ciclar el led.
+    interrupcion = 0;           // detecta si, al esperar, se pulsa el botón.
 
 void encendido()
 {
@@ -29,7 +29,7 @@ void ciclo(int prendido, int apagado)
         // esperar 10 ms
         _delay_ms(10);
         // verificar si hubo interrupción.
-        if ( !interrupcion )
+        if ( !interrupcion ) 
             interrupcion = PIND & (1<<PD2);
     }
 
@@ -88,20 +88,21 @@ int main()
     while (1)
     {
         // leer el estado del pulsador.
-        buttonState = PIND & (1<<PD2) | interrupcion;
+        estado_boton = PIND & (1<<PD2) | interrupcion;
 
         computar_operacion();
 
         // si cambió el estado del pulsador.
-        if ( buttonState != lastButtonState )
+        if ( estado_boton != ultimo_estado_boton )
         {
             // si hay key up.
-			if (!buttonState)
+			if (!estado_boton)
 			{
                 // pasar al siguiente modo.
                 operacion++;
                 // volver al inicio (ya se usaron todos los modos).
-                if ( operacion > 6 ) operacion = 1;
+                if ( operacion > 6 ) 
+                    operacion = 1;
 			}
 
             // si hubo interrupcion: resetear la variable.
@@ -109,7 +110,7 @@ int main()
                 interrupcion = 0;
 
         	// si hubo cambios hay que actualizar el valor anterior.
-        	lastButtonState = buttonState;
+        	ultimo_estado_boton = estado_boton;
         }
     }
     return 0;

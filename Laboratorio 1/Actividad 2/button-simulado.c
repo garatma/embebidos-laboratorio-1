@@ -2,7 +2,7 @@
 #include <util/delay.h>
 
 // variables:
-int buttonState = 0;	// para leer el estado del pulsador.
+int estado_boton = 0;	// para leer el estado del pulsador.
 
 int main()
 {
@@ -14,9 +14,9 @@ int main()
 	while (1)
 	{
 		// leer el estado del pulsador.
-		buttonState = PORTD & (1<<PD2);
+		estado_boton = PORTD & (1<<PD2);
 
-		if ( buttonState )
+		if ( estado_boton )
 		{
 			// si el pulsador está apretado.
 			// encender el led.
