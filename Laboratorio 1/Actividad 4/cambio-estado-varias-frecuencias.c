@@ -3,10 +3,10 @@
 #include <util/delay.h>
 
 // variables:
-int estado_boton,               // estado del botón.
-    ultimo_estado_boton = 0,    // para detectar cambios.
-    operacion = 1,              // cómo ciclar el led.
-    interrupcion = 0;           // detecta si, al esperar, se pulsa el botón.
+int8_t estado_boton,               // estado del botón.
+       ultimo_estado_boton = 0,    // para detectar cambios.
+       operacion = 1,              // cómo ciclar el led.
+       interrupcion = 0;           // detecta si, en delay, se pulsa el botón.
 
 void encendido()
 {
@@ -24,7 +24,8 @@ void ciclo(int prendido, int apagado)
     // prende el led.
     PORTB |= (1<<PB5);
     // ciclo espera-verificación interrupción.
-    for (int i = 0; i < prendido/10; i++)
+    int16_t i;
+    for (i = 0; i < prendido/10; i++)
     {
         // esperar 10 ms
         _delay_ms(10);
@@ -36,7 +37,7 @@ void ciclo(int prendido, int apagado)
     // apaga el led.
     PORTB &= ~(1<<PB5);
     // ciclo espera-verificación interrupción.
-    for (int i = 0; i < apagado/10; i++)
+    for (i = 0; i < apagado/10; i++)
     {
         // esperar 10 ms
         _delay_ms(10);
@@ -78,7 +79,7 @@ void computar_operacion()
     }
 }
 
-int main()
+void main()
 {
     // inicializar el pin del pulsador como entrada.
     DDRD &= ~(1<<DDD2);
@@ -113,5 +114,4 @@ int main()
         	ultimo_estado_boton = estado_boton;
         }
     }
-    return 0;
 }
