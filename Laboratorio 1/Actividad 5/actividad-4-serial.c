@@ -8,7 +8,7 @@
  */
 
 // variables:
-int modo = 1;   // para controlar cómo prender y apagar el led.
+int8_t modo = 1;   // para controlar cómo prender y apagar el led.
 
 void encendido()
 {
