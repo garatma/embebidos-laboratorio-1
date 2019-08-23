@@ -8,10 +8,10 @@
 #include <util/delay.h>
 
 // variables:
-int estado_boton,
-    ultimo_estado_boton = 0;
+int8_t estado_boton,
+       ultimo_estado_boton = 0;
 
-int main()
+void main()
 {
 	// inicializar el pin del pulsador como entrada.
 	DDRD &= ~(1<<DDD2);
@@ -37,5 +37,4 @@ int main()
 			ultimo_estado_boton = estado_boton;
 		}
 	}
-	return 0;
 }
