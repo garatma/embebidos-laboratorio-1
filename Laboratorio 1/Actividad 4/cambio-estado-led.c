@@ -2,7 +2,7 @@
 #define F_CPU 16000000UL
 #include <util/delay.h>
 
-void main()
+int main()
 {
     // inicializar el pin del led como salida.
     DDRB |= (1<<DDB5);

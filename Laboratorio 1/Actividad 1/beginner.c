@@ -28,7 +28,6 @@ int main(void)
 		_delay_ms(1000);
 
 		PORTB &= ~(1 << LED_PORT);
-
 		// espera.
 		_delay_ms(1000);
 	}

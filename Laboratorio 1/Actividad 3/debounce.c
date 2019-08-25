@@ -13,7 +13,7 @@ int8_t estado_boton,       	  // the current reading from the input pin.
        ultimo_estado_boton = 0;   // the previous reading from the input pin.
 
 
-void main()
+int main()
 {
 	// inicializar el pin del pulsador como entrada.
 	DDRD &= ~(1<<DDD2);
@@ -53,4 +53,5 @@ void main()
 			}
 		}
 	}
+	return 0;
 }

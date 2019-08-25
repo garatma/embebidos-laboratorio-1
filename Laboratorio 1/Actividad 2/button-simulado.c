@@ -4,7 +4,7 @@
 // variables:
 int8_t estado_boton = 0;	// para leer el estado del pulsador.
 
-void main()
+int main()
 {
 	// inicializar el pin del pulsador como salida para poder controlarlo.
 	DDRD |= (1<<DDD2);
@@ -32,4 +32,5 @@ void main()
 			PORTD |= (1<<PD2);
 		}
 	}
+	return 0;
 }

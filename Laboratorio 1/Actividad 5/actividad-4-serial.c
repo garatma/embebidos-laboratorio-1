@@ -44,11 +44,10 @@ void setup()
 
 void loop()
 {
-
     // procesar si se recibieron datos.
     if ( Serial.available() > 0 )
     {
-        // si se especifica un nuevo modo, cambiar el actual. el -'0' es para 
+        // si se especifica un nuevo modo, cambiar el actual. el -'0' es para
         // convertir de caracter a entero.
         modo = Serial.read() - '0';
     }
@@ -59,23 +58,18 @@ void loop()
         case 1:
             encendido();
             break;
-
         case 2:
             ciclo(1,1);
             break;
-
         case 3:
             ciclo(0.5,0.5);
             break;
-
         case 4:
             ciclo(0.25,0.25);
             break;
-
         case 5:
             ciclo(0.5,1);
             break;
-
         default:
             apagado();
             break;

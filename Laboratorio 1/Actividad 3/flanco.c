@@ -11,7 +11,7 @@
 int8_t estado_boton,
        ultimo_estado_boton = 0;
 
-void main()
+int main()
 {
 	// inicializar el pin del pulsador como entrada.
 	DDRD &= ~(1<<DDD2);
@@ -37,4 +37,5 @@ void main()
 			ultimo_estado_boton = estado_boton;
 		}
 	}
+	return 0;
 }
