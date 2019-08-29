@@ -1,14 +1,8 @@
 #include <stdbool.h>
 #include <stdint.h>
-#include "Arduino.h"
-#include "fnqueue.h"
 #include <LiquidCrystal.h>
 
-#define TECLA_UP 		0	// botón up del LCD Keypad Shield
-#define TECLA_DOWN 		1 	// botón down del LCD Keypad Shield
-#define TECLA_LEFT 		2 	// botón left del LCD Keypad Shield
-#define TECLA_RIGHT 	3 	// botón right del LCD Keypad Shield
-#define TECLA_SELECT 	4	// botón select del LCD Keypad Shield
+
 
 // these constants won't change.  But you can change the size of
 // your LCD using them:
@@ -64,6 +58,10 @@ void setup()
 {
 	// inicializar pin 10 como salida
 	DDRB |= (1<<DDB2);	//pinMode(10, OUTPUT);
+
+	ADCSRA |= (1<<ADEN); 	// habilita el ADC.
+	ADCSRA |= (1<<ADATE);	// habilita el auto trigger.
+	ADCSRA |= (1<<ADIE);	// habilita la interrupción de ADC.
 
 	sei();
     // set up the LCD's number of columns and rows:
