@@ -1,25 +1,24 @@
 /*
  LCD1602 Keypad Shield 1.0 Test Sketch - LiquidCrystal Library
- 
+
  Este sketch demuestra el uso del LCD1602 Key Shield 1.0.
  Para ello se toman los pulsos de los botones mediante la entrada
  analógica AD0 y, mediante la librería LiquidCrystal de Arduino 1.0,
  se muestra en el display la tecla pulsada. La librería LiquidCrystal
- permite controlar cualquier display LCD compatible con el 
+ permite controlar cualquier display LCD compatible con el
  controlador Hitachi HD44780.
- 
+
  La configuración de la Librería se realiza en base al esquemático
  del shield.
- 
+
  Este ejemplo está basado en un ejemplo provisto con la documentación del
- LCD1602 Keypad Shield, el cuál ha sido adaptado en base a los ejemplos 
+ LCD1602 Keypad Shield, el cuál ha sido adaptado en base a los ejemplos
  de la librería LiquidCrystal de Arduino.
- 
+
  http://www.arduino.cc/en/Tutorial/LiquidCrystal
  http://arduino.cc/en/Reference/LiquidCrystal
- 
- 
- */
+*/
+
 #include <stdbool.h>
 #include <stdint.h>
 #include "Arduino.h"
@@ -35,12 +34,12 @@ const uint8_t numCols = 16;
 LiquidCrystal lcd(8, 9, 4, 5, 6, 7);
 
 //Key message
-char msgs[5][17] = 
+char msgs[5][17] =
 {
-    " Right Key:  OK ", 
-    " Up Key:     OK ", 
-    " Down Key:   OK ", 
-    " Left Key:   OK ", 
+    " Right Key:  OK ",
+    " Up Key:     OK ",
+    " Down Key:   OK ",
+    " Left Key:   OK ",
     " Select Key: OK "
 };
 uint16_t adc_key_val[5] ={30, 150, 360, 535, 760 };
@@ -49,10 +48,10 @@ uint16_t adc_key_in;
 uint16_t key=-1;
 uint16_t oldkey=-1;
 
-void setup() 
+void setup()
 {
     pinMode(10, OUTPUT);
-    // set up the LCD's number of columns and rows: 
+    // set up the LCD's number of columns and rows:
     lcd.begin(numCols,numRows);
     analogWrite(10, 100); //Controla intensidad backlight
     lcd.setCursor(0, 0);
@@ -66,17 +65,17 @@ void setup()
 
 void loop()
 {
-    adc_key_in = analogRead(0);      // read the value from the sensor  
+    adc_key_in = analogRead(0);      // read the value from the sensor
 
     key = get_key(adc_key_in);	     // convert into key press
 
     if (key != oldkey)		         // if keypress is detected
-    { 
+    {
         delay(50);		             // wait for debounce time
-        adc_key_in = analogRead(0);  // read the value from the sensor  
+        adc_key_in = analogRead(0);  // read the value from the sensor
         key = get_key(adc_key_in);   // convert into key press
-        if (key != oldkey)				
-        {			
+        if (key != oldkey)
+        {
             oldkey = key;
             if (key >=0)
             {
@@ -100,4 +99,3 @@ uint16_t get_key(unsigned int input)
 
     return k;
 }
-

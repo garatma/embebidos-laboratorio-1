@@ -6,4 +6,5 @@ isr(tecla_down):
 	· mostrar el mensaje "press any key"
 	· limpiar la tecla guardada.
 
+¿mientras se mantiene apretada una tecla, qué pasa si se aprieta otra?
 ¿tareas?
