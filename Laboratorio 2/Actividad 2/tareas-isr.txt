@@ -1,0 +1,9 @@
+isr(tecla_up):
+	· detectar qué tecla se presionó. guardarla?
+	· mostrar el mensaje correspondiente.
+
+isr(tecla_down):
+	· mostrar el mensaje "press any key"
+	· limpiar la tecla guardada.
+
+¿tareas?

@@ -22,8 +22,8 @@ void critical_begin(void)
     {
         anidamiento++;
     }
-    // Si las interrupciones estaban deshabilitadas, y no fué el módulo de región
-    // crítica, no hacer nada.
+    // Si las interrupciones estaban deshabilitadas, y no fué el módulo de
+	// región crítica, no hacer nada.
 }
 
 void critical_end(void)
@@ -39,4 +39,3 @@ void critical_end(void)
     else if ((status_register & 0x80) != 0)
         sei();
 }
-
