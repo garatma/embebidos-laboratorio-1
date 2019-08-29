@@ -12,15 +12,6 @@ void encendido()
     PORTB |= (1<<PB5);
 }
 
-void ciclo(int prendido, int apagado)
-{
-    PORTB |= (1<<PB5);
-    _delay_ms(prendido);
-
-    PORTB &= ~(1<<PB5);
-	_delay_ms(apagado);
-}
-
 void apagado()
 {
     PORTB &= ~(1<<PB5);
@@ -55,29 +46,17 @@ ISR(INT0_vect)
 	// pasar al siguiente modo.
 	operacion++;
 	// volver al inicio (ya se usaron todos los modos).
-	if ( operacion > 6 )
+	if ( operacion > 2 )
 		operacion = 1;
 
 	// llamar a la función correspondiente.
 	switch (operacion)
 	{
 		case 1:
-			fnqueue_add(&encendido());
+			fnqueue_add( encendido );
 			break;
 		case 2:
-			fnqueue_add(&ciclo(1000,1000));
-			break;
-		case 3:
-			fnqueue_add(&ciclo(500,500));
-			break;
-		case 4:
-			fnqueue_add(&ciclo(250,250));
-			break;
-		case 5:
-			fnqueue_add(&ciclo(500,1000));
-			break;
-		case 6:
-			fnqueue_add(&apagado());
+			fnqueue_add( apagado );
 			break;
 	}
 }
