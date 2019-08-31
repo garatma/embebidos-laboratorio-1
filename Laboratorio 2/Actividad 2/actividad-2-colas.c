@@ -1,5 +1,6 @@
 #include <stdbool.h>
 #include <stdint.h>
+#include "fnqueue.h"
 #include <LiquidCrystal.h>
 
 // these constants won't change.  But you can change the size of
@@ -32,7 +33,7 @@ uint8_t NUM_KEYS = 5;
 uint16_t adc_key_in;
 volatile uint8_t key=255;
 volatile uint8_t last_key=255;
-volatile uint8_t cont = 0;
+volatile uint8_t lock = 0;
 
 // Convert ADC value to key number
 uint16_t get_key(unsigned int input)
@@ -59,6 +60,8 @@ void setup()
     ADCSRA |= (1 << ADIE);      // habilitar interrupciones.
     sei();
 
+    fnqueue_init();
+
     // set up the LCD's number of columns and rows:
     lcd.begin(numCols,numRows);
     analogWrite(10, 100); //Controla intensidad backlight
@@ -75,15 +78,30 @@ void setup()
 
 void loop()
 {
-	// fnqueue_run();
+	fnqueue_run();
+}
+
+void procesar_entrada()
+{
+    key = get_key(ADCL | (ADCH << 8)); // analógico -> digital
+    lcd.setCursor(0, 1);
+    if ( key > 4 )
+    {
+        // key_up
+        // indexar con last_key porque hay que mostar la última tecla que se
+        // dejó de apretar.
+        lcd.print(msgs_up[last_key]);
+    }
+    else
+    {
+        // key_down
+        lcd.print(msgs_down[key]);
+    }
+    last_key = key;
+    ADCSRA |= (1 << ADSC);  // iniciar próxima conversión.
 }
 
 ISR(ADC_vect)
 {
-	key = get_key(ADCL | (ADCH << 8));// convert into key press
-    lcd.setCursor(0, 1);
-    if ( key > 4 ) lcd.print(msgs_up[last_key]);
-    else lcd.print(msgs_down[key]);
-    last_key = key;
-    ADCSRA |= (1 << ADSC);  // iniciar próxima conversión.
+    fnqueue_add(procesar_entrada);
 }

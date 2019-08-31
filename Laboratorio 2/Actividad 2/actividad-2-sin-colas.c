@@ -70,7 +70,7 @@ void setup()
     lcd.setCursor(0, 1);
     lcd.print("Press any key...");
 
-    ADCSRA |= (1 << ADSC);      // iniciar primera conversión.
+    ADCSRA |= (1 << ADSC);      // iniciar primera conversion.
 }
 
 void loop()
@@ -85,5 +85,5 @@ ISR(ADC_vect)
     if ( key > 4 ) lcd.print(msgs_up[last_key]);
     else lcd.print(msgs_down[key]);
     last_key = key;
-    ADCSRA |= (1 << ADSC);  // iniciar próxima conversión.
+    ADCSRA |= (1 << ADSC);  // iniciar próxima conversion.
 }

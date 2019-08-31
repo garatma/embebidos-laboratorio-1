@@ -1,14 +1,6 @@
 #include <stdbool.h>
 #include <stdint.h>
-#include "Arduino.h"
-#include "fnqueue.h"
 #include <LiquidCrystal.h>
-
-#define TECLA_UP 		0	// botón up del LCD Keypad Shield
-#define TECLA_DOWN 		1 	// botón down del LCD Keypad Shield
-#define TECLA_LEFT 		2 	// botón left del LCD Keypad Shield
-#define TECLA_RIGHT 	3 	// botón right del LCD Keypad Shield
-#define TECLA_SELECT 	4	// botón select del LCD Keypad Shield
 
 // these constants won't change.  But you can change the size of
 // your LCD using them:
@@ -19,7 +11,7 @@ const uint8_t numCols = 16;
 LiquidCrystal lcd(8, 9, 4, 5, 6, 7);
 
 //Key message
-char msgs[5][17] =
+char msgs_down[5][17] =
 {
     " Right Key:  OK ",
     " Up Key:     OK ",
@@ -27,17 +19,20 @@ char msgs[5][17] =
     " Left Key:   OK ",
     " Select Key: OK "
 };
+char msgs_up[5][17] =
+{
+    " Right Key:  NO ",
+    " Up Key:     NO ",
+    " Down Key:   NO ",
+    " Left Key:   NO ",
+    " Select Key: NO "
+};
 uint16_t adc_key_val[5] = {30, 150, 360, 535, 760};
 uint8_t NUM_KEYS = 5;
 uint16_t adc_key_in;
-uint16_t key=-1;
-uint16_t oldkey=-1;
-
-void dibujar()
-{
-	lcd.setCursor(0, 1);
-	lcd.print(msgs[key]);
-}
+volatile uint8_t key=-1;
+volatile uint8_t last_key=-1;
+uint8_t oldkey=-1;
 
 // Convert ADC value to key number
 uint16_t get_key(unsigned int input)
@@ -55,9 +50,20 @@ uint16_t get_key(unsigned int input)
 
 ISR(ADC_vect)
 {
-    adc_key_in = ADCH;      		// read the value from the sensor
-	key = get_key(adc_key_in);	    // convert into key press
-	fnqueue_add(dibujar);
+	key = get_key(ADCL | (ADCH << 8));// convert into key press
+    lcd.setCursor(0, 1);
+    if ( last_key == -1 )
+    {
+        // key Down
+        lcd.print(msgs_down[key]);
+    }
+    else
+    {
+        // key up
+        lcd.print(msgs_up[key]);
+    }
+    last_key = key;
+    ADCSRA |= (1 << ADSC);  // iniciar próxima conversion.
 }
 
 void setup()
@@ -65,7 +71,13 @@ void setup()
 	// inicializar pin 10 como salida
 	DDRB |= (1<<DDB2);	//pinMode(10, OUTPUT);
 
-	sei();
+    ADMUX &= ~(1 << ADLAR);     // left aligned (sheet: 24.9.3.1/2).
+    ADMUX |= (1 << REFS0);      // voltaje referencia.
+    ADCSRA |= (1 << ADEN);      // enable ADC.
+    ADCSRA |= (1 << ADIE);      // habilitar interrupciones.
+    sei();
+
+    ADCSRA |= (1 << ADSC);      // iniciar primera conversion.
     // set up the LCD's number of columns and rows:
     lcd.begin(numCols,numRows);
     analogWrite(10, 100); //Controla intensidad backlight
@@ -80,5 +92,5 @@ void setup()
 
 void loop()
 {
-	fnqueue_run();
+	// fnqueue_run();
 }

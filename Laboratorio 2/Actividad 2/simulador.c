@@ -4,6 +4,7 @@
 #include <avr/interrupt.h>
 #include <stdbool.h>
 #include <stdint.h>
+#include <LiquidCrystal.h>
 #define FNQUEUE_LENGTH 16
 
 
@@ -121,78 +122,95 @@ bool fnqueue_add(void (*function)(void))
 
 //---------------------------------main-----------------------------------------
 
+// these constants won't change.  But you can change the size of
+// your LCD using them:
+const uint8_t numRows = 2;
+const uint8_t numCols = 16;
 
+// initialize the library with the numbers of the interface pins
+LiquidCrystal lcd(8, 9, 4, 5, 6, 7);
 
-
-
-// variables:
-int8_t operacion = 1;              // cómo ciclar el led.
-
-void ciclo()
+//Key message
+char msgs_down[5][17] =
 {
-	int16_t apagado,
-	 		prendido;
+    " Right Key:  OK ",
+    " Up Key:     OK ",
+    " Down Key:   OK ",
+    " Left Key:   OK ",
+    " Select Key: OK "
+};
+char msgs_up[5][17] =
+{
+    " Right Key:  NO ",
+    " Up Key:     NO ",
+    " Down Key:   NO ",
+    " Left Key:   NO ",
+    " Select Key: NO "
+};
+uint16_t adc_key_val[5] = {30, 150, 360, 535, 760};
+uint8_t NUM_KEYS = 5;
+uint16_t adc_key_in;
+volatile uint8_t key=255;
+volatile uint8_t last_key=255;
+volatile uint8_t lock = 0;
 
-	switch (operacion)
-	{
-		case 1:
-		    PORTB |= (1<<PB5);
-			break;
-		case 2:
-			PORTB |= (1<<PB5);
-			_delay_ms(1000);
-			PORTB &= ~(1<<PB5);
-			_delay_ms(1000);
-			break;
-		case 3:
-			PORTB |= (1<<PB5);
-			_delay_ms(500);
-			PORTB &= ~(1<<PB5);
-			_delay_ms(500);
-			break;
-		case 4:
-			PORTB |= (1<<PB5);
-			_delay_ms(500);
-			PORTB &= ~(1<<PB5);
-			_delay_ms(1000);
-			break;
-		default:
-			PORTB &= ~(1<<PB5);
-			break;
-	}
+// Convert ADC value to key number
+uint16_t get_key(unsigned int input)
+{
+    uint16_t k;
+    for (k = 0; k < NUM_KEYS; k++)
+        if (input < adc_key_val[k])
+            return k;
+
+    if (k >= NUM_KEYS)
+        k = 255;     // No valid key pressed
+
+    return k;
 }
 
-int main()
+void setup()
 {
-	cli();
-	// habilitar pin 2 para disparar interrupciones con cambio de flanco.
-	EICRA |= (1<<ISC01);
-	EIMSK |= (1<<INT0);
-	sei();
+	// inicializar pin 10 como salida
+	DDRB |= (1<<DDB2);	//pinMode(10, OUTPUT);
 
-    // inicializar el pin del 2 como entrada.
-    DDRD &= ~(1<<DDD2);
-    // inicializar el pin del led como salida.
-    DDRB |= (1<<DDB5);
+    ADMUX &= ~(1 << ADLAR);     // left aligned (sheet: 24.9.3.1/2).
+    ADMUX |= (1 << REFS0);      // voltaje referencia.
+    ADCSRA |= (1 << ADEN);      // enable ADC.
+    ADCSRA |= (1 << ADIE);      // habilitar interrupciones.
+    sei();
 
-	// inicializar la cola de funciones
-	fnqueue_init();
+    fnqueue_init();
 
-    while (1)
-    {
-		// desencolar y ejecutar.
-		fnqueue_run();
-    }
-    return 0;
+    // set up the LCD's number of columns and rows:
+    lcd.begin(numCols,numRows);
+    analogWrite(10, 100); //Controla intensidad backlight
+    lcd.setCursor(0, 0);
+    lcd.print("Key Pad Test");
+    lcd.setCursor(0, 1);
+    lcd.print("Sist.Emb. 2019");
+    //delay(2000);
+    lcd.setCursor(0, 1);
+    lcd.print("Press any key...");
+
+    ADCSRA |= (1 << ADSC);      // iniciar primera conversión.
 }
 
-ISR(INT0_vect)
+void loop()
 {
-	// pasar al siguiente modo.
-	operacion++;
-	// volver al inicio (ya se usaron todos los modos).
-	if ( operacion > 6 )
-		operacion = 1;
+	fnqueue_run();
+}
 
-	fnqueue_add(ciclo);
+void procesar_entrada()
+{
+    key = get_key(ADCL | (ADCH << 8));
+    lcd.setCursor(0, 1);
+    if ( key > 4 ) lcd.print(msgs_up[last_key]);
+    else lcd.print(msgs_down[key]);
+    last_key = key;
+    ADCSRA |= (1 << ADSC);  // iniciar próxima conversión.
+}
+
+ISR(ADC_vect)
+{
+    fnqueue_add(procesar_entrada);
 }
