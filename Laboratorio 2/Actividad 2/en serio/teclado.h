@@ -10,11 +10,10 @@ void key_up_callback(void (*handler)(), int8_t tecla);
 void teclado_init();
 const uint16_t adc_key_val[CANTIDAD_TECLAS] = {30, 150, 360, 535, 760};
 
-typedef struct struct_estructura_teclado {
-	volatile int8_t key; // tecla apretada actualmente.
+typedef struct estructura_teclado {
 	volatile int8_t last_key; // última tecla apretada.
 
 	void (*handlers_up[CANTIDAD_TECLAS])(); // arreglo de handlrs para key_up.
 	void (*handlers_down[CANTIDAD_TECLAS])(); // arreglo de handlrs para
 											  // key_down.
-} * estructura_teclado ;
+} * estado_teclado ;
