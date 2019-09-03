@@ -1,9 +1,6 @@
 #include <stdint.h>
-#include <avr/io.h>
-#include <avr/interrupt.h>
-#include "critical.h"
 
-static volatile int8_t anidamiento;
+static volatile anidamiento;
 
 void critical_begin(void)
 {
