@@ -19,7 +19,11 @@ void key_down_callback(void (*handler)(), int16_t tecla)
 void teclado_init()
 {
 	estado_teclado_var.last_key = 255;  // no se apretó ninguna tecla
-
+	for ( int i = 0; i < 5; i++ )
+	{
+		estado_teclado_var.handlers_up[i] = -1;
+		estado_teclado_var.handlers_down[i] = -1;
+	}
 	fnqueue_init(); // inicializar la cola de funciones.
 
 	ADCSRA |= (1 << ADPS2) | (1 << ADPS1) | (1 << ADPS0);// prescaler al máximo.
@@ -40,9 +44,9 @@ int16_t get_key(int16_t input)
 	int16_t k = 255;
 	if ( 0 <= input && input < 30 )
 		k = 3;
-	else if ( 30 <= input && input < 150 )
+	else if ( 30 <= input && input < 220 )
 	   	k = 0;
-	else if ( 150 <= input && input < 360 )
+	else if ( 220 <= input && input < 360 )
 	   	k = 1;
 	else if ( 360 <= input && input < 535 )
 	   	k = 2;
@@ -56,11 +60,19 @@ void procesar_entrada()
     int16_t key = get_key((ADCL) | (ADCH << 8));
     if ( 0 <= key && key <= 4 )
     {
-		estado_teclado_var.handlers_down[key]();
+		if ( estado_teclado_var.handlers_down != -1 )
+			estado_teclado_var.handlers_down[key]();
 		estado_teclado_var.last_key = key;
     }
     else
-		estado_teclado_var.handlers_up[estado_teclado_var.last_key]();
+	{
+		if ( estado_teclado_var.handlers_down != -1 )
+		{
+			if ( estado_teclado_var.last_key != 255 )
+				estado_teclado_var.handlers_up[estado_teclado_var.last_key]();
+			estado_teclado_var.last_key = 255;
+		}
+	}
 }
 
 ISR(ADC_vect)

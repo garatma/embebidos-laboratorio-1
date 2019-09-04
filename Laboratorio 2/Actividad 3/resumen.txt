@@ -1,7 +1,7 @@
 contador automático con dimmer
 
 resumen:
-    1. en todo momento se muestra valor del conteo y operación actual.
+    1. en todo momento se muestra valor del conteo en segundos y operación actual.
     2. se usan los botones de UP, DOWN y Select.
     3. se puede variar paso del contador, tiempo transcurrido entre cambios y el brillo.
 
