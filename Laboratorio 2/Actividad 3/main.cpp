@@ -5,7 +5,7 @@
 #include "teclado.h"
 #include "fnqueue.h"
 
-char m[64] = "Sistemas Embebidos, 2do Cuatrimestre - Laboratorio 2, comision 8";
+char m[65] = "Sistemas Embebidos, 2do Cuatrimestre - Laboratorio 2, comision 8";
 
 
 volatile int16_t tiempos_guardados [10];
@@ -28,6 +28,18 @@ volatile bool en_mca = false,
               logged = false;
 
 LiquidCrystal lcd(8, 9, 4, 5, 6, 7);
+
+void up_mp();
+void down_mp();
+void select_mp_up();
+void select_mp_down();
+void up_mvt();
+void down_mvt();
+void up_mad();
+void down_mad();
+void cambiar_modo(void (*up)(), void (*down)(), void (*selu)(), void (*seld)());
+
+
 
 void imprimir_tiempo_seleccionado()
 {
@@ -88,7 +100,6 @@ void up_mp()
 {
     en_mca = true;
     en_mp = false;
-    TCCR2B |= (1 << CS22) | (1 << CS21) | (1 << CS20);
     cambiar_modo(&pasar_a_mp, &down_mca, &select_mca, &select_mca);
 }
 void down_mp()
@@ -121,7 +132,7 @@ void select_mp_up()
         lcd.print("s");
         lcd.setCursor(0,0);
         en_mad = true;
-        cambiar_modo(&up_mad, &down_mad, &select_mca, &select_mca);
+        cambiar_modo(&up_mad, &down_mad, &pasar_a_mp, &select_mca);
     }
     tiempo_pressed_down = 0;
 }
@@ -163,6 +174,9 @@ void up_mad()
         brillo_seleccionado += 20;
     analogWrite(10, 255*brillo_seleccionado/100);
     imprimir_brillo_seleccionado();
+	cli();
+	tiempo_sin_hacer_nada = 0;
+	sei();
 }
 void down_mad()
 {
@@ -170,6 +184,9 @@ void down_mad()
         brillo_seleccionado -= 20;
     analogWrite(10, 255*brillo_seleccionado/100);
     imprimir_brillo_seleccionado();
+	cli();
+	tiempo_sin_hacer_nada = 0;
+	sei();
 }
 
 // -----------------------------------------------------------------------------
@@ -179,6 +196,7 @@ void inicio()
     input = true;
     en_mp = true;
     en_mca = false;
+    TCCR2B |= (1 << CS22) | (1 << CS21) | (1 << CS20);
     lcd.setCursor(0,0);
     lcd.clear();
     lcd.print("Reset hace: 0s");
