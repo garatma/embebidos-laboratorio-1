@@ -42,9 +42,9 @@ void teclado_init()
 int16_t get_key(int16_t input)
 {
 	int16_t k = 255;
-	if ( 0 <= input && input < 30 )
+	if ( 0 <= input && input < 5 )
 		k = 3;
-	else if ( 30 <= input && input < 220 )
+	else if ( 5 <= input && input < 220 )
 	   	k = 0;
 	else if ( 220 <= input && input < 360 )
 	   	k = 1;
