@@ -213,20 +213,24 @@ void cambiar_modo(void (*up)(), void (*down)(), void (*selu)(), void (*seld)())
 
 void mensaje_bienvenida()
 {
-    int8_t i;
+    int8_t i = 0;
     lcd.autoscroll();
     lcd.setCursor(16,0);
 
-    for ( i = 0; i < 24; i++)
+	while ( i < 24 && !input )
     {
         lcd.print(m[i]);
+		fnqueue_run();
         delay(300);
+		i++;
     }
     lcd.setCursor(0,0);
-    for ( i = 24; i < 64; i++)
+	while ( i < 64 && !input )
     {
         lcd.print(m[i]);
+		fnqueue_run();
         delay(300);
+		i++;
     }
 
     lcd.noAutoscroll();
@@ -305,9 +309,9 @@ int main()
     callback_vacias();
     cambiar_modo(&inicio, &inicio, &inicio, &inicio);
 
-    // while ( !input )
-    //     mensaje_bienvenida();
-
+	while (!input)
+        mensaje_bienvenida();
+	
 	while (1)
 		fnqueue_run();
 	return 0;
