@@ -1,5 +1,3 @@
-ARDUINO_DIR = ../../arduino-1.8.9
-BOARD_TAG    = uno
+ARDUINO_DIR = ../../ide-arduino
 ARDUINO_LIBS = LiquidCrystal
-
-include ../../Arduino-Makefile/Arduino.mk
+include ../../arduino-makefile/Arduino.mk

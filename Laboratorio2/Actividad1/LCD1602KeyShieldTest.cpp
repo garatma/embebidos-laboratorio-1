@@ -36,6 +36,8 @@
 // include the library code:
 #include <LiquidCrystal.h>
 
+uint16_t get_key(unsigned int input);
+
 // these constants won't change.  But you can change the size of
 // your LCD using them:
 const uint8_t numRows = 2;

@@ -2,8 +2,8 @@
 #include <LiquidCrystal.h>
 #include <stdint.h>
 #include "Arduino.h"
-#include "../../headers/fnqueue.h"
-#include "../../headers/teclado.h"
+#include "fnqueue.h"
+#include "teclado.h"
 
 char m[65] = "Sistemas Embebidos, 2do Cuatrimestre - Laboratorio 2, comision 8";
 
@@ -39,8 +39,6 @@ void up_mad();
 void down_mad();
 void cambiar_modo(void (*up)(), void (*down)(), void (*selu)(), void (*seld)());
 
-
-
 void imprimir_tiempo_seleccionado()
 {
     lcd.clear();
@@ -55,16 +53,19 @@ void imprimir_tiempo_seleccionado()
     else
         lcd.print("-");
 }
-
 void imprimir_brillo_seleccionado()
 {
+    int16_t segundos_display_aux;
+    cli();
+    segundos_display_aux = segundos_display;
+    sei();
     lcd.clear();
     lcd.print("Brillo: ");
     lcd.print(brillo_seleccionado);
     lcd.print("%");
     lcd.setCursor(0,1);
     lcd.print("Cuenta: ");
-    lcd.print(segundos_display);
+    lcd.print(segundos_display_aux);
     lcd.print("s");
     lcd.setCursor(0,0);
 }
@@ -82,7 +83,9 @@ void pasar_a_mp()
 }
 void down_mca()
 {
+    cli();
     tiempos_guardados[cantidad_tiempos] = segundos_display;
+    sei();
     // si ya guardé 10, sobrescribir los primeros
     if ( cantidad_tiempos == 9 )
         cantidad_tiempos = 0;
@@ -113,12 +116,15 @@ void down_mp()
 }
 void select_mp_up()
 {
+    int16_t segundos_absoluto_aux,
+            segundos_display_aux;
     cli();
-    int16_t copia_segundos = segundos_absoluto;
-    logged = false;
+    segundos_absoluto_aux = segundos_absoluto;
+    segundos_display_aux = segundos_display;
     sei();
+    logged = false;
     en_mp = false;
-    if ( copia_segundos - tiempo_pressed_down < 3 )
+    if ( segundos_absoluto_aux - tiempo_pressed_down < 3 )
     {
         imprimir_tiempo_seleccionado();
         cambiar_modo(&up_mvt, &down_mvt, &pasar_a_mp, &select_mca);
@@ -128,7 +134,7 @@ void select_mp_up()
         imprimir_brillo_seleccionado();
         lcd.setCursor(0,1);
         lcd.print("Cuenta: ");
-        lcd.print(segundos_display);
+        lcd.print(segundos_display_aux);
         lcd.print("s");
         lcd.setCursor(0,0);
         en_mad = true;
@@ -138,13 +144,13 @@ void select_mp_up()
 }
 void select_mp_down()
 {
-    cli();
     if ( !logged )
     {
+        cli();
         tiempo_pressed_down = segundos_absoluto;
+        sei();
         logged = true;
     }
-    sei();
 }
 
 // ----------------------------------- mvt -------------------------------------
@@ -172,21 +178,25 @@ void up_mad()
 {
     if ( brillo_seleccionado < 100 )
         brillo_seleccionado += 20;
+    else
+        brillo_seleccionado = 20;
     analogWrite(10, 255*brillo_seleccionado/100);
-    imprimir_brillo_seleccionado();
 	cli();
 	tiempo_sin_hacer_nada = 0;
 	sei();
+    imprimir_brillo_seleccionado();
 }
 void down_mad()
 {
     if ( brillo_seleccionado > 20 )
         brillo_seleccionado -= 20;
+    else
+        brillo_seleccionado = 100;
     analogWrite(10, 255*brillo_seleccionado/100);
-    imprimir_brillo_seleccionado();
 	cli();
 	tiempo_sin_hacer_nada = 0;
 	sei();
+    imprimir_brillo_seleccionado();
 }
 
 // -----------------------------------------------------------------------------
@@ -196,10 +206,10 @@ void inicio()
     input = true;
     en_mp = true;
     en_mca = false;
-    TCCR2B |= (1 << CS22) | (1 << CS21) | (1 << CS20);
     lcd.setCursor(0,0);
     lcd.clear();
     lcd.print("Reset hace: 0s");
+    TCCR2B |= (1 << CS22) | (1 << CS21) | (1 << CS20);
     cambiar_modo(&up_mp, &down_mp, &select_mp_up, &select_mp_down);
 }
 
@@ -209,6 +219,67 @@ void cambiar_modo(void (*up)(), void (*down)(), void (*selu)(), void (*seld)())
     key_up_callback(down, TECLA_DOWN);
     key_up_callback(selu, TECLA_SELECT);
     key_down_callback(seld, TECLA_SELECT);
+}
+
+void isr_en_mca()
+{
+    int8_t segundos_display_aux;
+    cli();
+    segundos_display++;
+    segundos_display_aux = segundos_display;
+    sei();
+    lcd.clear();
+    lcd.print("Cuenta: ");
+    lcd.print(segundos_display_aux);
+    lcd.print("s");
+}
+
+void isr_en_mp()
+{
+    int16_t segundos_absoluto_aux,
+           ultimo_reset_aux;
+    cli();
+    segundos_absoluto_aux = segundos_absoluto;
+    ultimo_reset_aux = ultimo_reset;
+    sei();
+    lcd.clear();
+    lcd.print("Reset hace: ");
+    if ( ultimo_reset_aux == -1 )
+        lcd.print(0);
+    else
+        lcd.print(segundos_absoluto_aux - ultimo_reset_aux);
+    lcd.print("s");
+}
+
+void isr_en_mad()
+{
+    int8_t tiempo_sin_hacer_nada_aux;
+    cli();
+    tiempo_sin_hacer_nada++;
+    tiempo_sin_hacer_nada_aux = tiempo_sin_hacer_nada;
+    sei();
+    if ( tiempo_sin_hacer_nada_aux == 5 )
+    {
+        tiempo_sin_hacer_nada_aux = 0;
+        pasar_a_mp();
+    }
+}
+
+ISR(TIMER2_OVF_vect)
+{
+    ciclos++;
+    if ( ciclos == 62 )
+    {
+        ciclos = 0;
+        segundos_absoluto++;
+
+        if ( en_mca )
+            fnqueue_add(isr_en_mca);
+        else if ( en_mp )
+            fnqueue_add(isr_en_mp);
+        else if ( en_mad )
+            fnqueue_add(isr_en_mad);
+    }
 }
 
 void mensaje_bienvenida()
@@ -234,45 +305,10 @@ void mensaje_bienvenida()
     }
 
     lcd.noAutoscroll();
-    delay(1000);
-    lcd.clear();
-}
-
-ISR(TIMER2_OVF_vect)
-{
-    ciclos++;
-    if ( ciclos == 62 )
+    if ( !input )
     {
-        ciclos = 0;
-        segundos_absoluto++;
-
-        if ( en_mca )
-        {
-            segundos_display++;
-            lcd.clear();
-            lcd.print("Cuenta: ");
-            lcd.print(segundos_display);
-            lcd.print("s");
-        }
-        else if ( en_mp )
-        {
-            lcd.clear();
-            lcd.print("Reset hace: ");
-            if ( ultimo_reset == -1 )
-                lcd.print(0);
-            else
-                lcd.print(segundos_absoluto - ultimo_reset);
-            lcd.print("s");
-        }
-        else if ( en_mad )
-        {
-            tiempo_sin_hacer_nada++;
-            if ( tiempo_sin_hacer_nada == 5 )
-            {
-                tiempo_sin_hacer_nada = 0;
-                pasar_a_mp();
-            }
-        }
+        delay(1000);
+        lcd.clear();
     }
 }
 
@@ -280,7 +316,6 @@ void callback_vacias()
 {
     key_down_callback(&select_mca, TECLA_UP);
     key_down_callback(&select_mca, TECLA_DOWN);
-    key_down_callback(&select_mca, TECLA_SELECT);
     key_up_callback(&select_mca, TECLA_RIGHT);
     key_down_callback(&select_mca, TECLA_RIGHT);
     key_up_callback(&select_mca, TECLA_LEFT);
@@ -307,7 +342,7 @@ int main()
 
 	teclado_init();
     callback_vacias();
-    cambiar_modo(&inicio, &inicio, &inicio, &inicio);
+    cambiar_modo(&inicio, &inicio, &inicio, &select_mca);
 
 	while (!input)
         mensaje_bienvenida();

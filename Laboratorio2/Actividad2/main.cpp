@@ -2,8 +2,8 @@
 #include <LiquidCrystal.h>
 #include <stdint.h>
 #include "Arduino.h"
-#include "/home/manuel/Repos/laboratorios-embebidos/headers/fnqueue.h"
-#include "/home/manuel/Repos/laboratorios-embebidos/headers/teclado.h"
+#include "fnqueue.h"
+#include "teclado.h"
 
 // these constants won't change.  But you can change the size of
 // your LCD using them:
