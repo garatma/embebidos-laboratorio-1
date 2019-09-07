@@ -223,7 +223,7 @@ void cambiar_modo(void (*up)(), void (*down)(), void (*selu)(), void (*seld)())
 
 void isr_en_mca()
 {
-    int8_t segundos_display_aux;
+    int16_t segundos_display_aux;
     cli();
     segundos_display++;
     segundos_display_aux = segundos_display;
