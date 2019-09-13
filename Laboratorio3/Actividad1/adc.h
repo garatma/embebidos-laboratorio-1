@@ -15,6 +15,8 @@ struct estado_adc
 {
 	void (* callbacks[CANTIDAD_CANALES_ADC])();
 	bool canales_incializados[CANTIDAD_CANALES_ADC];
+	bool primera_conversion;
+	int8_t canal_actual;
 };
 
 typedef struct struct_adc_cfg adc_cfg;

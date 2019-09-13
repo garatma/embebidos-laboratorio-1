@@ -1,9 +1,0 @@
-#include "adc.h"
-
-struct estado_adc adc;
-
-bool adc_init(adc_cfg *cfg)
-{
-	int8_t canal = cfg -> canal;
-	
-}
