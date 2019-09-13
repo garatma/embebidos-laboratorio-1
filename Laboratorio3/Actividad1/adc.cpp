@@ -3,32 +3,13 @@
 #include "adc.h"
 #include "fnqueue.h"
 
-struct estado_adc adc;
-volatile int16_t valor_adc;
-
-void driver_init()
-{
-	fnqueue_init();
-
-	adc.primera_conversion = true;
-	for ( int8_t i = 0; i < CANTIDAD_CANALES_ADC; i++ )
-		adc.canales_incializados[i] = false;
-
-	// configuración báisca y común para todos los canales.
-	ADCSRA |= (1 << ADPS2) | (1 << ADPS1) | (1 << ADPS0);// prescaler al máximo.
-	ADMUX |= (1 << REFS0);	// voltaje referencia.
-	ADMUX &= ~(1 << ADLAR); // left aligned (sheet: 24.9.3.1/2).
-	ADCSRA |= (1 << ADEN);  // enable ADC.
-	ADCSRA |= (1 << ADIE);  // habilitar interrupciones.
-
-	sei();
-	// ADCSRA |= (1 << ADSC);      // iniciar primera conversión.
-	/* ↑ no creo que esté bien. no debería dispararse una conversión si no hay
-	 * canales inicializados. debería realizarse la conversión la primera vez
-	 * que se inicializa uno, en ese canal y luego alternar entre todos los ini-
-	 * cializados
-	*/
-}
+volatile struct adc_cfg adc[CANTIDAD_CANALES_ADC];
+volatile int8_t canal_actual;
+bool inicializado[CANTIDAD_CANALES_ADC] = {false, false,
+	 									   false, false,
+										   false, false};
+int8_t primer_canal;
+bool primera_inicializacion = true;
 
 void cambiar_canal(int8_t canal)
 {
@@ -60,68 +41,81 @@ void cambiar_canal(int8_t canal)
 	}
 }
 
-bool adc_init(adc_cfg * cfg)
+bool adc_init(struct adc_cfg * cfg)
 {
-	// permitir que se inicialice el canal dos veces?
 	int8_t canal = cfg -> canal;
-	int8_t error = false;
+	bool error = false;
 	if ( -1 < canal && canal < CANTIDAD_CANALES_ADC )
 	{
-		adc.canales_incializados[canal] = true;
-		adc.callbacks[canal] = cfg -> callback_conversion_lista;
-		adc.canal_actual = canal;
-		// inicializar registros?
-		if ( adc.primera_conversion == true )
-		{
-			cambiar_canal(canal);
+	    adc[canal] = *cfg;
+	    adc[canal].activo = true;
+		inicializado[canal] = true;
+	    canal_actual = canal;
+		adc[canal].hay_conversion=false;
+
+	    // si no hay conversion iniciar
+	    if ( primera_inicializacion )
+	    {
+			fnqueue_init();
+			primer_canal = canal;
+			// configuración báisca y común para todos los canales.
+			ADCSRA |= (1 << ADPS2) | (1 << ADPS1) | (1 << ADPS0);
+			ADMUX |= (1 << REFS0);	// voltaje referencia.
+			//ADMUX &= ~(1 << ADLAR); // left aligned (sheet: 24.9.3.1/2).
+			ADCSRA |= (1 << ADEN);  // enable ADC.
+			ADCSRA |= (1 << ADIE);  // habilitar interrupciones.
+			cambiar_canal(canal_actual);
 			ADCSRA |= (1 << ADSC);	// iniciar conversión.
-			adc.primera_conversion = false;
-		}
+	        primera_inicializacion = false;
+	    }
 	}
 	else
-		error = true;	// canal incorrecto.
+		error = true;
 	return error;
 }
 
 // retorna la posición donde está el canal inicializado entre inicio y fin, si
 // es que lo encuentra. sino, retorna -1.
-int8_t buscar_canal_inicializado(int8_t inicio, int8_t fin)
+int8_t obtener_proximo()
 {
-	int8_t i = inicio,
-		   retorno = -1;
-	bool encontre_canal_inicializado = false;
-	while ( i < fin && encontre_canal_inicializado == false )
+	int8_t i=canal_actual+1;
+	bool encontre=false;
+	while (i<CANTIDAD_CANALES_ADC && !encontre)
 	{
-		// buscar entre [canal_actual+1,5].
-		encontre_canal_inicializado = adc.canales_incializados[i] == true;
+		encontre = inicializado[i]==true;
 		i++;
 	}
-	if ( encontre_canal_inicializado == true )
-		retorno = i-1; // -1 para compensar el último i++.
-	return retorno;
+	if(!encontre)
+	{
+		i=0;
+		while (i<=canal_actual && !encontre)
+		{
+			encontre = inicializado[i]==true;
+			i++;
+		}
+	}
+	return i-1;
 }
 
-void procesar_entrada()
+void adc_loop()
 {
-	// qué hago con valor_adc ?
-	// ejecuto la función o la encolo?
-	adc.callbacks[adc.canal_actual]();	// ejecutar callback asociada al canal.
-
-	// obtener próximo canal inicializado.
-	int8_t proximo_canal = 0;
-	proximo_canal = buscar_canal_inicializado(adc.canal_actual + 1,
-		 									  CANTIDAD_CANALES_ADC);
-	if ( proximo_canal == -1 )
-		buscar_canal_inicializado(0, adc.canal_actual); // buscar entre
-													//[0, canal_actual]
-
-	adc.canal_actual = proximo_canal;	// actualizo el canal actual.
-	cambiar_canal(adc.canal_actual);	// actualizo los registros.
-	ADCSRA |= (1 << ADSC);
+    // para cada canal de adc
+    for ( int8_t i = 0; i < 6; i++ )
+        if ( adc[i].hay_conversion  == true )
+        {
+            adc[i].callback();
+            adc[i].hay_conversion=false;
+        }
 }
 
 ISR(ADC_vect)
 {
-	valor_adc = (ADCL) | (ADCH << 8);	// obtener valor del adc.
-	fnqueue_add(procesar_entrada);
+    adc[canal_actual].valor = ADC;
+    adc[canal_actual].hay_conversion = true;
+    int8_t proximo = obtener_proximo();
+    if ( proximo == primer_canal )
+        fnqueue_add(adc_loop);
+    canal_actual = proximo;
+	cambiar_canal(canal_actual);
+    ADCSRA |= (1 << ADSC);	// iniciar conversión.
 }
