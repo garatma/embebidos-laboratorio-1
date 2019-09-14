@@ -4,7 +4,7 @@
 
 struct adc_cfg
 {
-	void (* callback)();
+	void (* callback)(int16_t);
 	int8_t canal;
 	int16_t valor;
 	bool activo;

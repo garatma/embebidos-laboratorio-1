@@ -3,7 +3,7 @@
 #include "adc.h"
 #include "fnqueue.h"
 
-volatile struct adc_cfg adc[CANTIDAD_CANALES_ADC];
+struct adc_cfg adc[CANTIDAD_CANALES_ADC];
 volatile int8_t canal_actual;
 bool inicializado[CANTIDAD_CANALES_ADC] = {false, false,
 	 									   false, false,
@@ -50,23 +50,22 @@ bool adc_init(struct adc_cfg * cfg)
 	    adc[canal] = *cfg;
 	    adc[canal].activo = true;
 		inicializado[canal] = true;
-	    canal_actual = canal;
 		adc[canal].hay_conversion=false;
 
 	    // si no hay conversion iniciar
 	    if ( primera_inicializacion )
 	    {
-			fnqueue_init();
+	    	canal_actual = canal;
 			primer_canal = canal;
+	        primera_inicializacion = false;
+			cambiar_canal(canal_actual);
 			// configuración báisca y común para todos los canales.
 			ADCSRA |= (1 << ADPS2) | (1 << ADPS1) | (1 << ADPS0);
 			ADMUX |= (1 << REFS0);	// voltaje referencia.
 			//ADMUX &= ~(1 << ADLAR); // left aligned (sheet: 24.9.3.1/2).
 			ADCSRA |= (1 << ADEN);  // enable ADC.
 			ADCSRA |= (1 << ADIE);  // habilitar interrupciones.
-			cambiar_canal(canal_actual);
 			ADCSRA |= (1 << ADSC);	// iniciar conversión.
-	        primera_inicializacion = false;
 	    }
 	}
 	else
@@ -75,7 +74,7 @@ bool adc_init(struct adc_cfg * cfg)
 }
 
 // retorna la posición donde está el canal inicializado entre inicio y fin, si
-// es que lo encuentra. sino, retorna -1.
+// es que lo encuentra.
 int8_t obtener_proximo()
 {
 	int8_t i=canal_actual+1;
@@ -100,17 +99,17 @@ int8_t obtener_proximo()
 void adc_loop()
 {
     // para cada canal de adc
-    for ( int8_t i = 0; i < 6; i++ )
-        if ( adc[i].hay_conversion  == true )
+    for ( int8_t i = 0; i < CANTIDAD_CANALES_ADC; i++ )
+        if ( adc[i].hay_conversion == true )
         {
-            adc[i].callback();
-            adc[i].hay_conversion=false;
+			adc[i].hay_conversion=false;
+            adc[i].callback(adc[i].valor);
         }
 }
 
 ISR(ADC_vect)
 {
-    adc[canal_actual].valor = ADC;
+    adc[canal_actual].valor = (ADCL) | (ADCH << 8);
     adc[canal_actual].hay_conversion = true;
     int8_t proximo = obtener_proximo();
     if ( proximo == primer_canal )
