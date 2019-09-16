@@ -64,7 +64,8 @@ void teclado_init()
 		estado_teclado_var.handlers_up[i] = -1;
 		estado_teclado_var.handlers_down[i] = -1;
 	}
-	
+
 	adc0.canal = 0;
 	adc0.callback = &procesar_entrada;
+	adc_init(&adc0);
 }

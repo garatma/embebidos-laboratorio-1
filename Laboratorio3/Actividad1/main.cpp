@@ -10,7 +10,7 @@ int8_t indice = 0,
 	   modo = 0,
 	   cantidad_censados = 0;
 
-float min = 0,
+float min = 200,
 	  max = 0,
 	  prom = 0,
 	  suma = 0,
@@ -36,10 +36,14 @@ void convertir_entrada_a_temperatura(int16_t valor)
 		actual = valor/2.048;
 		if ( actual < min ) min = actual;
 		else if ( actual > max ) max = actual;
-		
+
+		if ( cantidad_censados < MAX_MUESTRAS )
+			cantidad_censados++;
+		else
+			suma -= muestras[indice];
+
 		muestras[indice] = actual;
 		suma += actual;
-		if ( cantidad_censados < MAX_MUESTRAS ) cantidad_censados++;
 		prom = suma/cantidad_censados;
 
 		indice++;
@@ -52,28 +56,28 @@ void convertir_entrada_a_temperatura(int16_t valor)
 
 void imprimir()
 {
-	lcd.print("Temperatura ");
+	lcd.clear();
 	switch (modo)
 	{
 		case 0:
-			lcd.print("actual: ");
+			lcd.print("Actual: ");
 			lcd.print(actual);
 			break;
 		case 1:
-			lcd.print("máxima: ");
+			lcd.print("Maxima: ");
 			lcd.print(max);
 			break;
 		case 2:
-			lcd.print("mínima: ");
+			lcd.print("Minima: ");
 			lcd.print(min);
 			break;
 		case 3:
-			lcd.print("promedio: ");
+			lcd.print("Promedio: ");
 			lcd.print(prom);
 			break;
 	}
 }
-			
+
 ISR(TIMER2_OVF_vect)
 {
 	ciclos++;
@@ -87,7 +91,7 @@ ISR(TIMER2_OVF_vect)
 }
 
 void cambiar_modo(void (* down)(), void (* up)())
-{	
+{
 	key_up_callback(down, TECLA_DOWN);
 	key_up_callback(up, TECLA_UP);
 }
@@ -95,25 +99,25 @@ void cambiar_modo(void (* down)(), void (* up)())
 void pasar_a_max()
 {
 	modo = 1;
-	cambiar_modo(&pasar_a_max, &pasar_a_min);
+	cambiar_modo(&pasar_a_actual, &pasar_a_min);
 }
 
 void pasar_a_min()
 {
 	modo = 2;
-	cambiar_modo(&pasar_a_min, &pasar_a_prom);
+	cambiar_modo(&pasar_a_max, &pasar_a_prom);
 }
 
 void pasar_a_prom()
 {
 	modo = 3;
-	cambiar_modo(&pasar_a_prom, &pasar_a_actual);
+	cambiar_modo(&pasar_a_min, &pasar_a_actual);
 }
 
 void pasar_a_actual()
 {
 	modo = 0;
-	cambiar_modo(&pasar_a_actual, &pasar_a_max);
+	cambiar_modo(&pasar_a_prom, &pasar_a_max);
 }
 
 void nada()
@@ -127,7 +131,7 @@ void callback_init()
 	key_down_callback(&nada, TECLA_SELECT);
 	key_down_callback(&nada, TECLA_RIGHT);
 	key_down_callback(&nada, TECLA_LEFT);
-	
+
 	key_up_callback(&pasar_a_max, TECLA_UP);
 	key_up_callback(&pasar_a_prom, TECLA_DOWN);
 }
@@ -143,7 +147,7 @@ int main()
 
 	for ( int8_t i = 0; i < MAX_MUESTRAS; i++ )
 		muestras[i] = 0;
-	
+
 	fnqueue_init();
 	teclado_init();
 	callback_init();
@@ -152,6 +156,11 @@ int main()
 	adc1.canal = 1;
 	adc1.callback = &convertir_entrada_a_temperatura;
 	adc_init(&adc1);
+
+	TCCR2A = 0;
+	TCCR2B = 0;
+	TIMSK2 |= (1 << TOIE2);
+	TCCR2B |= (1 << CS22) | (1 << CS21) | (1 << CS20);
 
 	while (1)
 		fnqueue_run();

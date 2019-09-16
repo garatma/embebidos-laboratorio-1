@@ -16,14 +16,14 @@ void cambiar_canal(int8_t canal)
 	// deshabilitar interrupciones?
 	switch (canal) {
 		case 0:
-			ADMUX &= ~(1 << MUX2) && ~(1 << MUX1) && ~(1 << MUX0);	// 000
+			ADMUX &= ~(1 << MUX2) & ~(1 << MUX1) & ~(1 << MUX0);	// 000
 			break;
 		case 1:
-			ADMUX &= ~(1 << MUX2) && ~(1 << MUX1); // 00x
+			ADMUX &= ~(1 << MUX2) & ~(1 << MUX1); // 00x
 			ADMUX |= (1 << MUX0);	// 001
 			break;
 		case 2:
-			ADMUX &= ~(1 << MUX2) && ~(1 << MUX0);	// 0x0
+			ADMUX &= ~(1 << MUX2) & ~(1 << MUX0);	// 0x0
 			ADMUX |= (1 << MUX1);	// 010
 			break;
 		case 3:
@@ -31,7 +31,7 @@ void cambiar_canal(int8_t canal)
 			ADMUX |= (1 << MUX1) | (1 << MUX0);	// 011
 			break;
 		case 4:
-			ADMUX &= ~(1 << MUX1) && ~(1 << MUX0);	// x00
+			ADMUX &= ~(1 << MUX1) & ~(1 << MUX0);	// x00
 			ADMUX |= (1 << MUX2);	// 100
 			break;
 		case 5:
@@ -62,7 +62,7 @@ bool adc_init(struct adc_cfg * cfg)
 			// configuración báisca y común para todos los canales.
 			ADCSRA |= (1 << ADPS2) | (1 << ADPS1) | (1 << ADPS0);
 			ADMUX |= (1 << REFS0);	// voltaje referencia.
-			//ADMUX &= ~(1 << ADLAR); // left aligned (sheet: 24.9.3.1/2).
+			// ADMUX &= ~(1 << ADLAR); // left aligned (sheet: 24.9.3.1/2).
 			ADCSRA |= (1 << ADEN);  // enable ADC.
 			ADCSRA |= (1 << ADIE);  // habilitar interrupciones.
 			ADCSRA |= (1 << ADSC);	// iniciar conversión.
@@ -100,16 +100,19 @@ void adc_loop()
 {
     // para cada canal de adc
     for ( int8_t i = 0; i < CANTIDAD_CANALES_ADC; i++ )
-        if ( adc[i].hay_conversion == true )
+        if ( inicializado[i] == true && adc[i].hay_conversion == true )
         {
+			cli();
 			adc[i].hay_conversion=false;
-            adc[i].callback(adc[i].valor);
+			uint16_t valor_aux = adc[i].valor;
+			sei();
+            adc[i].callback(valor_aux);
         }
 }
 
 ISR(ADC_vect)
 {
-    adc[canal_actual].valor = (ADCL) | (ADCH << 8);
+    adc[canal_actual].valor = ADC;
     adc[canal_actual].hay_conversion = true;
     int8_t proximo = obtener_proximo();
     if ( proximo == primer_canal )
