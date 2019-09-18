@@ -26,4 +26,9 @@ class Label
     textAlign(LEFT,TOP);
     text(caption, x, y);
   }  
+
+  void setCaption(String caption)
+  {
+	  this.caption = caption;
+  }
 }
