@@ -43,7 +43,7 @@ Label label_texto_actual, label_temperatura_actual,
 	  label_texto_max, label_temperatura_max, 
 	  label_texto_min, label_temperatura_min, 
 	  label_texto_prom, label_temperatura_prom; 
-Label yVal1,yVal2,yVal3;
+Label yVal1,yVal2,yVal3,yVal4,yVal5,yVal6,yVal7,yVal8;
 
 //Ventana y viewports...
 int pgFunctionViewportWidth = 480;
@@ -58,10 +58,10 @@ void setup()
   	
   	//Se inicializan los arreglos para almacenar las funciones...
   	cantValues = pgFunctionViewportWidth;
-  	factual = new ScrollingFcnPlot(cantValues,color(100,0,0),-1,1);
-  	fmax = 	new ScrollingFcnPlot(cantValues,color(0,100,0),-1,1);
-  	fmin = 	new ScrollingFcnPlot(cantValues,color(0,0,100),-1,1); 
-  	fprom = 	new ScrollingFcnPlot(cantValues,color(100,100,100),-1,1);
+  	factual = new ScrollingFcnPlot(60,color(0,100,0),0,30);
+  	fmax = 	new ScrollingFcnPlot(60,color(100,0,0),0,30);
+  	fmin = 	new ScrollingFcnPlot(60,color(0,0,100),0,30); 
+  	fprom = 	new ScrollingFcnPlot(60,color(100,100,0),0,30);
 
   	//Se inicializan los botones...
   	boton_actual = new RectButton(pgFunctionViewportWidth+10,10,60,40,color(102),color(50),color(255),"Actual");
@@ -70,22 +70,23 @@ void setup()
   	boton_prom = new RectButton(pgFunctionViewportWidth+100,60,60,40,color(102),color(50),color(255),"Prom");
 
 	//Se inicializan los labels...
-  	label_texto_actual = new Label(pgFunctionViewportWidth+10,130,color(255),"T.Actual: ");
-  	label_temperatura_actual = new Label(pgFunctionViewportWidth+75,130,color(255),"-");
-  	label_texto_max = new Label(pgFunctionViewportWidth+10,150,color(255),"T.Max: ");
-  	label_temperatura_max = new	Label(pgFunctionViewportWidth+75,150,color(255),"-");
-  	label_texto_min = new Label(pgFunctionViewportWidth+10,170,color(255),"T.Min: ");
-  	label_temperatura_min = new Label(pgFunctionViewportWidth+75,170,color(255),"-");
-  	label_texto_prom = new Label(pgFunctionViewportWidth+10,190,color(255),"T.Prom: ");
-  	label_temperatura_prom = new Label(pgFunctionViewportWidth+75,190,color(255),"-");
+  	label_texto_actual = new Label(pgFunctionViewportWidth+10,130,color(0,100,0),"T.Actual: ");
+  	label_temperatura_actual = new Label(pgFunctionViewportWidth+75,130,color(0,100,0),"-");
+  	label_texto_max = new Label(pgFunctionViewportWidth+10,150,color(100,0,0),"T.Max: ");
+  	label_temperatura_max = new	Label(pgFunctionViewportWidth+75,150,color(100,0,0),"-");
+  	label_texto_min = new Label(pgFunctionViewportWidth+10,170,color(0,0,100),"T.Min: ");
+  	label_temperatura_min = new Label(pgFunctionViewportWidth+75,170,color(0,0,100),"-");
+  	label_texto_prom = new Label(pgFunctionViewportWidth+10,190,color(100,100,0),"T.Prom: ");
+  	label_temperatura_prom = new Label(pgFunctionViewportWidth+75,190,color(100,100,0),"-");
   	
-  	yVal1 = new Label(10,5,color(255),"+1");
-  	yVal2 = new Label(10,(pgViewportsHeight-20)/2,color(255),"0");
-  	yVal3 = new Label(10,pgViewportsHeight-25,color(255),"-1");
-  	
+  	yVal1 = new Label(10,5,color(255),"30");
+  	yVal2 = new Label(10,37,color(255),"25");
+  	yVal3 = new Label(10,220,color(255),"0");
+    yVal4 = new Label(10,73,color(255),"20");
+    yVal5 = new Label(10,110,color(255),"15");
+    yVal6 = new Label(10,147,color(255),"10");
+    yVal7 = new Label(10,183,color(255),"5");
   	//Inicializa el font de la GUI...
-  	myFont = createFont("FFScala", 14);
-  	textFont(myFont);
 
 	arduino = new Serial(this,Serial.list()[0],9600);
 	arduino.buffer(2);
@@ -94,14 +95,13 @@ void setup()
 void draw() 
 {
   	//Se actualizan las funciones de ejemplo (f1: coseno(x), f2: función que depende de la posición Y del mouse)
-  	float amount = map(cosVal, 0, cantValues, 0, 2*PI);
-  	factual.updateValue(cos(amount));
-  	fmax.updateValue(height-mouseY);
-  	fmin.updateValue(sin(amount));
-  	fprom.updateValue(tan(amount));
   	
-  	//Se incrementa el ángulo de la función coseno...
-  	cosVal = (cosVal + 1) % cantValues;
+  	factual.updateValue(actual);
+  	fmax.updateValue(maximo);
+  	fmin.updateValue(minimo);
+  	fprom.updateValue(prom);
+  	
+  	  	
   	
   	//Permite expermientar con la velocidad de scroll al actualizar más lentamente los valores...
   	//delay(50);
@@ -151,7 +151,8 @@ void draw()
   	
   	//Dibuja el eje X y el recuadro de los gráficos...
   	stroke(0);
-  	line(30, pgViewportsHeight/2, pgFunctionViewportWidth-10, pgViewportsHeight/2);
+  	
+  
   	rect(30,10,pgFunctionViewportWidth-40,pgViewportsHeight-20);
   	
   	//Se dibujan los botones...
@@ -173,6 +174,10 @@ void draw()
   	yVal1.display();
   	yVal2.display();
   	yVal3.display();  
+    yVal4.display();  
+    yVal5.display();  
+    yVal6.display();  
+    yVal7.display();  
 }
 
 void serialEvent(Serial p)

@@ -96,28 +96,20 @@ int8_t obtener_proximo()
 	return i-1;
 }
 
-void adc_loop()
+void procesar()
 {
-    // para cada canal de adc
-    for ( int8_t i = 0; i < CANTIDAD_CANALES_ADC; i++ )
-        if ( inicializado[i] == true && adc[i].hay_conversion == true )
-        {
-			cli();
-			adc[i].hay_conversion=false;
-			uint16_t valor_aux = adc[i].valor;
-			sei();
-            adc[i].callback(valor_aux);
-        }
+	cli();
+	int8_t canal = canal_actual;
+	int16_t valor_aux = adc[canal].valor;
+	canal_actual = obtener_proximo();
+	sei();
+	cambiar_canal(canal_actual);
+	ADCSRA |= (1 << ADSC);	// iniciar conversión.
+	adc[canal].callback(valor_aux);
 }
 
 ISR(ADC_vect)
 {
-    adc[canal_actual].valor = ADC;
-    adc[canal_actual].hay_conversion = true;
-    int8_t proximo = obtener_proximo();
-    if ( proximo == primer_canal )
-        fnqueue_add(adc_loop);
-    canal_actual = proximo;
-	cambiar_canal(canal_actual);
-    ADCSRA |= (1 << ADSC);	// iniciar conversión.
+	adc[canal_actual].valor = ADC;
+	fnqueue_add(procesar);
 }

@@ -6,7 +6,7 @@ struct adc_cfg
 {
 	void (* callback)(int16_t);
 	int8_t canal;
-	uint16_t valor;
+	int16_t valor;
 	bool activo;
 	bool hay_conversion;
 };
