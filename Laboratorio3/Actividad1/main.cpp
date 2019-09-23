@@ -4,13 +4,11 @@
 #include "fnqueue.h"
 #include "teclado.h"
 #define MAX_MUESTRAS 100
-#define CICLOS_STABLE 10
 
 LiquidCrystal lcd(8, 9, 4, 5, 6, 7);
 int8_t indice = 0,
 	   modo = 0,
-	   cantidad_censados = 0,
-	   contador_ciclos_stable = 0;
+	   cantidad_censados = 0;
 
 float min = 200,
 	  max = 0,
@@ -31,7 +29,7 @@ void pasar_a_actual();
 void convertir_entrada_a_temperatura(int16_t valor)
 {
 	cli();
-	if ( leer_temperatura && contador_ciclos_stable == CICLOS_STABLE )
+	if ( leer_temperatura )
 	{
 		leer_temperatura = false;
 		sei();
@@ -86,8 +84,6 @@ ISR(TIMER2_OVF_vect)
 	ciclos++;
 	if ( ciclos == 9 )
 	{
-		if ( contador_ciclos_stable < CICLOS_STABLE )
-			contador_ciclos_stable++;
 		fnqueue_add(imprimir);
 		// pasaron 0.15ms
 		ciclos = 0;
