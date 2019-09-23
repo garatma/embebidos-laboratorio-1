@@ -4,19 +4,6 @@
 #include "fnqueue.h"
 #define MAX_MUESTRAS 60
 
-
-
-
-
-// preguntar si está bien el uso de la librería Serial de arduino ya que pide
-// que sea asincrónico
-
-
-
-
-
-
-
 LiquidCrystal lcd(8, 9, 4, 5, 6, 7);
 int8_t indice = 0,
 	   modo = 1,

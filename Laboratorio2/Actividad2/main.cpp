@@ -94,11 +94,11 @@ int main()
 
 	// set up the LCD's number of columns and rows:
 	lcd.begin(numCols,numRows);
-	analogWrite(10, 255);
+	analogWrite(10,255);
 	lcd.setCursor(0, 0);
 	lcd.print("Key Pad Test");
 	lcd.setCursor(0, 1);
-	lcd.print("Press any key...");
+	lcd.print("Press any key..");
 
 	teclado_init();
 	callback_init();
