@@ -22,9 +22,9 @@ void key_down_callback(void (*handler)(), int16_t tecla)
 int16_t get_key(int16_t input)
 {
 	int8_t key = -1;
-	if ( 0 < input && input < 5 )
+	if ( 0 < input && input < 100 )
 		key = 3;
-	else if ( 5 <= input && input < 220 )
+	else if ( 100 <= input && input < 220 )
 	   	key = 0;
 	else if ( 220 <= input && input < 360 )
 	   	key = 1;

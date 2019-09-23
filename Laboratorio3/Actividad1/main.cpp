@@ -133,6 +133,11 @@ void callback_init()
 	key_down_callback(&nada, TECLA_RIGHT);
 	key_down_callback(&nada, TECLA_LEFT);
 
+	key_up_callback(&nada, TECLA_SELECT);
+	key_up_callback(&nada, TECLA_RIGHT);
+	key_up_callback(&nada, TECLA_LEFT);
+
+
 	key_up_callback(&pasar_a_max, TECLA_UP);
 	key_up_callback(&pasar_a_prom, TECLA_DOWN);
 }
