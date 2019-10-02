@@ -1,0 +1,5 @@
+#
+#Tue Apr 26 10:44:55 ART 2016
+com.intel.core.target.selection="Galileo"
+com.intel.core.project.type.id="com.intel.iotdevkit.cdt.iotCDTNature"
+com.intel.core.project.description="IoT"

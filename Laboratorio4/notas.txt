@@ -1,8 +1,0 @@
-
-notas laboratorio 4
-
-- conectarse al galileo por ssh
-- entorno para programar: eclipse
-- algo con la mac del galileo? conectar galileo al rooter por ethernet
-- intel system studio iot
-- 
