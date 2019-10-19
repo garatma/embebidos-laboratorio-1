@@ -11,118 +11,97 @@ SemaphoreHandle_t s_acceso, s_libres, s_ocupados;
 
 QueueHandle_t datos;
 
-// the setup function runs once when you press reset or power the board
 void setup() {
-	Serial.begin(9600);
-	while(!Serial);
-
-	datos = xQueueCreate(CANTIDAD_MAXIMA_DATOS,sizeof(uint32_t));
+  Serial.begin(9600);
+ 
+  datos = xQueueCreate(CANTIDAD_MAXIMA_DATOS,sizeof(uint32_t));
   
-	s_libres = xSemaphoreCreateCounting(CANTIDAD_MAXIMA_DATOS,
-										CANTIDAD_MAXIMA_DATOS);
+  s_libres = xSemaphoreCreateCounting(CANTIDAD_MAXIMA_DATOS,
+                    CANTIDAD_MAXIMA_DATOS);
 
-    s_ocupados = xSemaphoreCreateCounting(CANTIDAD_MAXIMA_DATOS,0);
+  s_ocupados = xSemaphoreCreateCounting(CANTIDAD_MAXIMA_DATOS,0);
 
-	s_acceso = xSemaphoreCreateMutex();
-	
-	if ( datos != NULL && 
-		 s_libres != NULL && 
-		 s_ocupados != NULL &&
-		 s_acceso != NULL )
-	{
-		xSemaphoreGive(s_acceso);
+  s_acceso = xSemaphoreCreateMutex();
+  
+  if ( datos != NULL && 
+     s_libres != NULL && 
+     s_ocupados != NULL &&
+     s_acceso != NULL )
+  {
+   
+    xSemaphoreGive(s_acceso);
 
-		xTaskCreate(
-			TaskProducir,
-			(const portCHAR *)"Blink",
-			128,
-			(void *) 100,
-			1, 
-			NULL );
+    xTaskCreate(
+      TaskProducir,
+      (const portCHAR *)"Blink",
+      128,
+      (void *) 100, // tiempo de espera
+      1, 
+      NULL );
 
-		xTaskCreate(
-			TaskProducir,
-			(const portCHAR *)"Blink",
-			128, 
-			(void *) 50,
-			1, 
-			NULL );
+    xTaskCreate(
+      TaskProducir,
+      (const portCHAR *)"Blink",
+      128, 
+      (void *) 50, // tiempo de espera
+      1, 
+      NULL );
 
-		xTaskCreate(
-			TaskConsumir,
-			(const portCHAR *)"AnalogRead",
-			128,
-			(void *) 75,
-			2,
-			NULL );
-	}
+    xTaskCreate(
+      TaskConsumir,
+      (const portCHAR *)"AnalogRead",
+      128,
+      (void *) 75, // tiempo de espera
+      2,
+      NULL );
+  }
 }
 
 void loop()
 {
 }
 
+// el dato a insertar es el tiempo de espera. en cada iteración, se incrementa
+// en uno.
 void TaskProducir(void * parametros)  
 {
- 	uint32_t tiempo_espera = (uint32_t) parametros; 
-	uint32_t dato = tiempo_espera;
-
-	while(1)
-	{
-		// si no anda esto del while, hay que hacerlo de la siguiente forma:
-		// xSemaphoreTake(s_acceso, (TickType_t) portMAX_DELAY);
-		// xSemaphoreTake(s_libres, (TickType_t) portMAX_DELAY);
-		// debería bloquearse indefinidamente https://freertos.org/a00122.html
-		while (xSemaphoreTake(s_acceso, (TickType_t) portMAX_DELAY) != pdTRUE);
-		while (xSemaphoreTake(s_libres, (TickType_t) portMAX_DELAY) != pdTRUE);
-		xQueueSend(datos, &dato, portMAX_DELAY);
-		xSemaphoreGive(s_ocupados);
-		xSemaphoreGive(s_acceso);
-		dato++;
-		vTaskDelay(tiempo_espera / portTICK_PERIOD_MS);
-	}
-		
-
-		/*
-		if(xSemaphoreTake(SemAcceso,( TickType_t ) 5 )==pdTRUE)
-		{
-			  if(uxSemaphoreGetCount( SemBuffer )!=5)
-			  {
-				  xSemaphoreGive(SemBuffer);
-				  //introducir en la cola
-				  
-			  }
-			  xSemaphoreGive(SemAcceso);
-			  vTaskDelay( 500 / portTICK_PERIOD_MS );
-		}
-		*/
+  uint32_t tiempo_espera = (uint32_t) parametros; 
+  uint32_t dato = tiempo_espera;
+  while(1)
+  {
+    xSemaphoreTake(s_libres, (TickType_t) portMAX_DELAY);
+    xSemaphoreTake(s_acceso, (TickType_t) portMAX_DELAY);
+    Serial.print("Productor inserta: ");
+    Serial.print(dato);
+    Serial.print(". Hay ");
+    Serial.print(uxSemaphoreGetCount(s_ocupados));
+	Serial.println(" elementos en la cola.");
+    xQueueSend(datos, &dato, portMAX_DELAY);
+    xSemaphoreGive(s_ocupados);
+    xSemaphoreGive(s_acceso);
+    dato++;
+    vTaskDelay(tiempo_espera / portTICK_PERIOD_MS);
+  }
 }
 
 void TaskConsumir(void * parametros)  // This is a task.
 {
- 	uint32_t tiempo_espera = (uint32_t) parametros; 
-	uint32_t dato = tiempo_espera;
+  uint32_t tiempo_espera = (uint32_t) parametros; 
+  uint32_t dato = tiempo_espera;
 
-	while(1)
-	{
-		while (xSemaphoreTake(s_acceso, (TickType_t) portMAX_DELAY) != pdTRUE);
-		while (xSemaphoreTake(s_ocupados,(TickType_t)portMAX_DELAY) != pdTRUE);
-		while (xQueueReceive(datos, &dato, portMAX_DELAY) != pdPASS);
-		xSemaphoreGive(s_libres);
-		xSemaphoreGive(s_acceso);
-		Serial.println(dato);
-		vTaskDelay(tiempo_espera / portTICK_PERIOD_MS);
-	}
-		/*
-		if(xSemaphoreTake(SemAcceso,( TickType_t ) 5 )==pdTRUE)
-		{
-			if(uxSemaphoreGetCount( SemBuffer )>0)
-			{
-				xSemaphoreTake(SemBuffer,( TickType_t ) 5 );
-				//sacar de la cola y mostrar el dato
-			}
-			xSemaphoreGive(SemAcceso);
-			vTaskDelay( 750 / portTICK_PERIOD_MS ); 
-		}
-		*/
+  while(1)
+  {
+    xSemaphoreTake(s_ocupados,(TickType_t) portMAX_DELAY);
+    xSemaphoreTake(s_acceso, (TickType_t) portMAX_DELAY);
+
+    xQueueReceive(datos, &dato, portMAX_DELAY);
+    xSemaphoreGive(s_libres);
+    xSemaphoreGive(s_acceso);
+    Serial.print("Consumidor remueve: ");
+    Serial.print(dato);
+    Serial.print(". Hay ");
+    Serial.print(uxSemaphoreGetCount(s_ocupados));
+	Serial.println(" elementos en la cola.");
+    vTaskDelay(tiempo_espera / portTICK_PERIOD_MS);
+  }
 }
