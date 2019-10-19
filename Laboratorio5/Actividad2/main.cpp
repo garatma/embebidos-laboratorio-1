@@ -7,6 +7,8 @@
 void TaskProducir(void * parametros);
 void TaskConsumir(void * parametros);
 
+int cont=0;
+
 SemaphoreHandle_t s_acceso, s_libres, s_ocupados;
 
 QueueHandle_t datos;
@@ -74,8 +76,9 @@ void TaskProducir(void * parametros)
     Serial.print("Productor inserta: ");
     Serial.print(dato);
     Serial.print(". Hay ");
-    Serial.print(uxSemaphoreGetCount(s_ocupados));
-	Serial.println(" elementos en la cola.");
+    cont++;
+    Serial.print(cont);
+    Serial.println(" elementos en la cola.");
     xQueueSend(datos, &dato, portMAX_DELAY);
     xSemaphoreGive(s_ocupados);
     xSemaphoreGive(s_acceso);
@@ -100,8 +103,9 @@ void TaskConsumir(void * parametros)  // This is a task.
     Serial.print("Consumidor remueve: ");
     Serial.print(dato);
     Serial.print(". Hay ");
-    Serial.print(uxSemaphoreGetCount(s_ocupados));
-	Serial.println(" elementos en la cola.");
+    cont--;
+    Serial.print(cont);
+  Serial.println(" elementos en la cola.");
     vTaskDelay(tiempo_espera / portTICK_PERIOD_MS);
   }
 }
