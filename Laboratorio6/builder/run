@@ -1,0 +1,2 @@
+wine DE1SoC_SystemBuilder.exe 
+rm -rf CodeGenerated

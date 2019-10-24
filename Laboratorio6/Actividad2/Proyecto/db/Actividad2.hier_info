@@ -1,0 +1,156 @@
+|Actividad2
+SW[0] => SW[0].IN1
+SW[1] => SW[1].IN1
+SW[2] => SW[2].IN1
+SW[3] => SW[3].IN1
+SW[4] => SW[4].IN1
+SW[5] => SW[5].IN1
+SW[6] => SW[6].IN1
+SW[7] => SW[7].IN1
+SW[8] => ~NO_FANOUT~
+SW[9] => ~NO_FANOUT~
+LEDR[0] << B:b1.s1
+LEDR[1] << B:b1.s1
+LEDR[2] << B:b1.s2
+LEDR[3] << B:b1.s2
+LEDR[4] << B:b1.s3
+LEDR[5] << B:b1.s3
+LEDR[6] << B:b1.s4
+LEDR[7] << B:b1.s4
+LEDR[8] << <GND>
+LEDR[9] << <GND>
+
+
+|Actividad2|B:b1
+n1[0] => n1[0].IN1
+n1[1] => n1[1].IN1
+n2[0] => n2[0].IN1
+n2[1] => n2[1].IN1
+n3[0] => n3[0].IN1
+n3[1] => n3[1].IN1
+n4[0] => n4[0].IN1
+n4[1] => n4[1].IN1
+s1[0] <= A:a5.s1
+s1[1] <= A:a5.s1
+s2[0] <= A:a5.s2
+s2[1] <= A:a5.s2
+s3[0] <= A:a6.s1
+s3[1] <= A:a6.s1
+s4[0] <= A:a6.s2
+s4[1] <= A:a6.s2
+
+
+|Actividad2|B:b1|A:a1
+n1[0] => LessThan0.IN2
+n1[0] => s1.DATAA
+n1[0] => s2.DATAB
+n1[1] => LessThan0.IN1
+n1[1] => s1.DATAA
+n1[1] => s2.DATAB
+n2[0] => LessThan0.IN4
+n2[0] => s1.DATAB
+n2[0] => s2.DATAA
+n2[1] => LessThan0.IN3
+n2[1] => s1.DATAB
+n2[1] => s2.DATAA
+s1[0] <= s1.DB_MAX_OUTPUT_PORT_TYPE
+s1[1] <= s1.DB_MAX_OUTPUT_PORT_TYPE
+s2[0] <= s2.DB_MAX_OUTPUT_PORT_TYPE
+s2[1] <= s2.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Actividad2|B:b1|A:a2
+n1[0] => LessThan0.IN2
+n1[0] => s1.DATAA
+n1[0] => s2.DATAB
+n1[1] => LessThan0.IN1
+n1[1] => s1.DATAA
+n1[1] => s2.DATAB
+n2[0] => LessThan0.IN4
+n2[0] => s1.DATAB
+n2[0] => s2.DATAA
+n2[1] => LessThan0.IN3
+n2[1] => s1.DATAB
+n2[1] => s2.DATAA
+s1[0] <= s1.DB_MAX_OUTPUT_PORT_TYPE
+s1[1] <= s1.DB_MAX_OUTPUT_PORT_TYPE
+s2[0] <= s2.DB_MAX_OUTPUT_PORT_TYPE
+s2[1] <= s2.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Actividad2|B:b1|A:a3
+n1[0] => LessThan0.IN2
+n1[0] => s1.DATAA
+n1[0] => s2.DATAB
+n1[1] => LessThan0.IN1
+n1[1] => s1.DATAA
+n1[1] => s2.DATAB
+n2[0] => LessThan0.IN4
+n2[0] => s1.DATAB
+n2[0] => s2.DATAA
+n2[1] => LessThan0.IN3
+n2[1] => s1.DATAB
+n2[1] => s2.DATAA
+s1[0] <= s1.DB_MAX_OUTPUT_PORT_TYPE
+s1[1] <= s1.DB_MAX_OUTPUT_PORT_TYPE
+s2[0] <= s2.DB_MAX_OUTPUT_PORT_TYPE
+s2[1] <= s2.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Actividad2|B:b1|A:a4
+n1[0] => LessThan0.IN2
+n1[0] => s1.DATAA
+n1[0] => s2.DATAB
+n1[1] => LessThan0.IN1
+n1[1] => s1.DATAA
+n1[1] => s2.DATAB
+n2[0] => LessThan0.IN4
+n2[0] => s1.DATAB
+n2[0] => s2.DATAA
+n2[1] => LessThan0.IN3
+n2[1] => s1.DATAB
+n2[1] => s2.DATAA
+s1[0] <= s1.DB_MAX_OUTPUT_PORT_TYPE
+s1[1] <= s1.DB_MAX_OUTPUT_PORT_TYPE
+s2[0] <= s2.DB_MAX_OUTPUT_PORT_TYPE
+s2[1] <= s2.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Actividad2|B:b1|A:a5
+n1[0] => LessThan0.IN2
+n1[0] => s1.DATAA
+n1[0] => s2.DATAB
+n1[1] => LessThan0.IN1
+n1[1] => s1.DATAA
+n1[1] => s2.DATAB
+n2[0] => LessThan0.IN4
+n2[0] => s1.DATAB
+n2[0] => s2.DATAA
+n2[1] => LessThan0.IN3
+n2[1] => s1.DATAB
+n2[1] => s2.DATAA
+s1[0] <= s1.DB_MAX_OUTPUT_PORT_TYPE
+s1[1] <= s1.DB_MAX_OUTPUT_PORT_TYPE
+s2[0] <= s2.DB_MAX_OUTPUT_PORT_TYPE
+s2[1] <= s2.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Actividad2|B:b1|A:a6
+n1[0] => LessThan0.IN2
+n1[0] => s1.DATAA
+n1[0] => s2.DATAB
+n1[1] => LessThan0.IN1
+n1[1] => s1.DATAA
+n1[1] => s2.DATAB
+n2[0] => LessThan0.IN4
+n2[0] => s1.DATAB
+n2[0] => s2.DATAA
+n2[1] => LessThan0.IN3
+n2[1] => s1.DATAB
+n2[1] => s2.DATAA
+s1[0] <= s1.DB_MAX_OUTPUT_PORT_TYPE
+s1[1] <= s1.DB_MAX_OUTPUT_PORT_TYPE
+s2[0] <= s2.DB_MAX_OUTPUT_PORT_TYPE
+s2[1] <= s2.DB_MAX_OUTPUT_PORT_TYPE
+
+
