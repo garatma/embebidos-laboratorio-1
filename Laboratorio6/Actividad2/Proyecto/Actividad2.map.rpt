@@ -1,6 +1,6 @@
 Analysis & Synthesis report for Actividad2
-Fri Oct 25 16:46:36 2019
-Quartus Prime Version 16.0.0 Build 211 04/27/2016 SJ Lite Edition
+Fri Oct 25 19:59:31 2019
+Quartus Prime Version 18.0.0 Build 614 04/24/2018 SJ Lite Edition
 
 
 ---------------------
@@ -10,60 +10,45 @@ Quartus Prime Version 16.0.0 Build 211 04/27/2016 SJ Lite Edition
   2. Analysis & Synthesis Summary
   3. Analysis & Synthesis Settings
   4. Parallel Compilation
-  5. Analysis & Synthesis Source Files Read
-  6. Analysis & Synthesis Resource Usage Summary
-  7. Analysis & Synthesis Resource Utilization by Entity
-  8. Registers Removed During Synthesis
-  9. General Register Statistics
- 10. Port Connectivity Checks: "demultiplexor:dm1"
- 11. Port Connectivity Checks: "contador:cin"
- 12. Post-Synthesis Netlist Statistics for Top Partition
- 13. Elapsed Time Per Partition
- 14. Analysis & Synthesis Messages
+  5. Analysis & Synthesis Messages
 
 
 
 ----------------
 ; Legal Notice ;
 ----------------
-Copyright (C) 1991-2016 Altera Corporation. All rights reserved.
-Your use of Altera Corporation's design tools, logic functions 
+Copyright (C) 2018  Intel Corporation. All rights reserved.
+Your use of Intel Corporation's design tools, logic functions 
 and other software and tools, and its AMPP partner logic 
 functions, and any output files from any of the foregoing 
 (including device programming or simulation files), and any 
 associated documentation or information are expressly subject 
-to the terms and conditions of the Altera Program License 
-Subscription Agreement, the Altera Quartus Prime License Agreement,
-the Altera MegaCore Function License Agreement, or other 
-applicable license agreement, including, without limitation, 
-that your use is for the sole purpose of programming logic 
-devices manufactured by Altera and sold by Altera or its 
-authorized distributors.  Please refer to the applicable 
-agreement for further details.
+to the terms and conditions of the Intel Program License 
+Subscription Agreement, the Intel Quartus Prime License Agreement,
+the Intel FPGA IP License Agreement, or other applicable license
+agreement, including, without limitation, that your use is for
+the sole purpose of programming logic devices manufactured by
+Intel and sold by Intel or its authorized distributors.  Please
+refer to the applicable agreement for further details.
 
 
 
-+-------------------------------------------------------------------------------+
-; Analysis & Synthesis Summary                                                  ;
-+---------------------------------+---------------------------------------------+
-; Analysis & Synthesis Status     ; Successful - Fri Oct 25 16:46:36 2019       ;
-; Quartus Prime Version           ; 16.0.0 Build 211 04/27/2016 SJ Lite Edition ;
-; Revision Name                   ; Actividad2                                  ;
-; Top-level Entity Name           ; Actividad2                                  ;
-; Family                          ; Cyclone V                                   ;
-; Logic utilization (in ALMs)     ; N/A                                         ;
-; Total registers                 ; 11                                          ;
-; Total pins                      ; 70                                          ;
-; Total virtual pins              ; 0                                           ;
-; Total block memory bits         ; 0                                           ;
-; Total DSP Blocks                ; 0                                           ;
-; Total HSSI RX PCSs              ; 0                                           ;
-; Total HSSI PMA RX Deserializers ; 0                                           ;
-; Total HSSI TX PCSs              ; 0                                           ;
-; Total HSSI PMA TX Serializers   ; 0                                           ;
-; Total PLLs                      ; 0                                           ;
-; Total DLLs                      ; 0                                           ;
-+---------------------------------+---------------------------------------------+
++---------------------------------------------------------------------------+
+; Analysis & Synthesis Summary                                              ;
++-----------------------------+---------------------------------------------+
+; Analysis & Synthesis Status ; Failed - Fri Oct 25 19:59:31 2019           ;
+; Quartus Prime Version       ; 18.0.0 Build 614 04/24/2018 SJ Lite Edition ;
+; Revision Name               ; Actividad2                                  ;
+; Top-level Entity Name       ; Actividad2                                  ;
+; Family                      ; Cyclone V                                   ;
+; Logic utilization (in ALMs) ; N/A until Partition Merge                   ;
+; Total registers             ; N/A until Partition Merge                   ;
+; Total pins                  ; N/A until Partition Merge                   ;
+; Total virtual pins          ; N/A until Partition Merge                   ;
+; Total block memory bits     ; N/A until Partition Merge                   ;
+; Total PLLs                  ; N/A until Partition Merge                   ;
+; Total DLLs                  ; N/A until Partition Merge                   ;
++-----------------------------+---------------------------------------------+
 
 
 +---------------------------------------------------------------------------------------------------------------------------+
@@ -75,13 +60,13 @@ agreement for further details.
 ; Top-level entity name                                                           ; Actividad2         ; Actividad2         ;
 ; Family name                                                                     ; Cyclone V          ; Cyclone V          ;
 ; Use smart compilation                                                           ; Off                ; Off                ;
-; Enable parallel Assembler and TimeQuest Timing Analyzer during compilation      ; On                 ; On                 ;
+; Enable parallel Assembler and Timing Analyzer during compilation                ; On                 ; On                 ;
 ; Enable compact report table                                                     ; Off                ; Off                ;
 ; Restructure Multiplexers                                                        ; Auto               ; Auto               ;
 ; MLAB Add Timing Constraints For Mixed-Port Feed-Through Mode Setting Don't Care ; Off                ; Off                ;
 ; Create Debugging Nodes for IP Cores                                             ; Off                ; Off                ;
 ; Preserve fewer node names                                                       ; On                 ; On                 ;
-; Disable OpenCore Plus hardware evaluation                                       ; Off                ; Off                ;
+; Intel FPGA IP Evaluation Mode                                                   ; Enable             ; Enable             ;
 ; Verilog Version                                                                 ; Verilog_2001       ; Verilog_2001       ;
 ; VHDL Version                                                                    ; VHDL_1993          ; VHDL_1993          ;
 ; State Machine Processing                                                        ; Auto               ; Auto               ;
@@ -132,7 +117,7 @@ agreement for further details.
 ; Report Connectivity Checks                                                      ; On                 ; On                 ;
 ; Ignore Maximum Fan-Out Assignments                                              ; Off                ; Off                ;
 ; Synchronization Register Chain Length                                           ; 3                  ; 3                  ;
-; PowerPlay Power Optimization During Synthesis                                   ; Normal compilation ; Normal compilation ;
+; Power Optimization During Synthesis                                             ; Normal compilation ; Normal compilation ;
 ; HDL message level                                                               ; Level2             ; Level2             ;
 ; Suppress Register Optimization Related Messages                                 ; Off                ; Off                ;
 ; Number of Removed Registers Reported in Synthesis Report                        ; 5000               ; 5000               ;
@@ -148,152 +133,25 @@ agreement for further details.
 ; Analysis & Synthesis Message Level                                              ; Medium             ; Medium             ;
 ; Disable Register Merging Across Hierarchies                                     ; Auto               ; Auto               ;
 ; Resource Aware Inference For Block RAM                                          ; On                 ; On                 ;
-; Synthesis Seed                                                                  ; 1                  ; 1                  ;
 ; Automatic Parallel Synthesis                                                    ; On                 ; On                 ;
 ; Partial Reconfiguration Bitstream ID                                            ; Off                ; Off                ;
 +---------------------------------------------------------------------------------+--------------------+--------------------+
 
 
-Parallel compilation was disabled, but you have multiple processors available. Enable parallel compilation to reduce compilation time.
-+-------------------------------------+
-; Parallel Compilation                ;
-+----------------------------+--------+
-; Processors                 ; Number ;
-+----------------------------+--------+
-; Number detected on machine ; 4      ;
-; Maximum allowed            ; 1      ;
-+----------------------------+--------+
-
-
-+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Source Files Read                                                                                                                                                    ;
-+----------------------------------+-----------------+------------------------------+---------------------------------------------------------------------------------------------+---------+
-; File Name with User-Entered Path ; Used in Netlist ; File Type                    ; File Name with Absolute Path                                                                ; Library ;
-+----------------------------------+-----------------+------------------------------+---------------------------------------------------------------------------------------------+---------+
-; Demultiplexor.v                  ; yes             ; User Verilog HDL File        ; C:/Users/se/Desktop/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/Demultiplexor.v ;         ;
-; Contador.v                       ; yes             ; User Verilog HDL File        ; C:/Users/se/Desktop/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/Contador.v      ;         ;
-; actividad2.v                     ; yes             ; Auto-Found Verilog HDL File  ; C:/Users/se/Desktop/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/actividad2.v    ;         ;
-+----------------------------------+-----------------+------------------------------+---------------------------------------------------------------------------------------------+---------+
-
-
-+----------------------------------------------------------------------------+
-; Analysis & Synthesis Resource Usage Summary                                ;
-+---------------------------------------------+------------------------------+
-; Resource                                    ; Usage                        ;
-+---------------------------------------------+------------------------------+
-; Estimate of Logic utilization (ALMs needed) ; 6                            ;
-;                                             ;                              ;
-; Combinational ALUT usage for logic          ; 4                            ;
-;     -- 7 input functions                    ; 0                            ;
-;     -- 6 input functions                    ; 0                            ;
-;     -- 5 input functions                    ; 0                            ;
-;     -- 4 input functions                    ; 0                            ;
-;     -- <=3 input functions                  ; 4                            ;
-;                                             ;                              ;
-; Dedicated logic registers                   ; 11                           ;
-;                                             ;                              ;
-; I/O pins                                    ; 70                           ;
-;                                             ;                              ;
-; Total DSP Blocks                            ; 0                            ;
-;                                             ;                              ;
-; Maximum fan-out node                        ; demultiplexor:dm1|Decoder0~0 ;
-; Maximum fan-out                             ; 8                            ;
-; Total fan-out                               ; 119                          ;
-; Average fan-out                             ; 0.77                         ;
-+---------------------------------------------+------------------------------+
-
-
-+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                 ;
-+----------------------------+-------------------+--------------+-------------------+------------+------+--------------+-------------------------------+---------------+--------------+
-; Compilation Hierarchy Node ; LC Combinationals ; LC Registers ; Block Memory Bits ; DSP Blocks ; Pins ; Virtual Pins ; Full Hierarchy Name           ; Entity Name   ; Library Name ;
-+----------------------------+-------------------+--------------+-------------------+------------+------+--------------+-------------------------------+---------------+--------------+
-; |Actividad2                ; 4 (0)             ; 11 (0)       ; 0                 ; 0          ; 70   ; 0            ; |Actividad2                   ; Actividad2    ; work         ;
-;    |contador:cin|          ; 3 (3)             ; 3 (3)        ; 0                 ; 0          ; 0    ; 0            ; |Actividad2|contador:cin      ; contador      ; work         ;
-;    |demultiplexor:dm1|     ; 1 (1)             ; 8 (8)        ; 0                 ; 0          ; 0    ; 0            ; |Actividad2|demultiplexor:dm1 ; demultiplexor ; work         ;
-+----------------------------+-------------------+--------------+-------------------+------------+------+--------------+-------------------------------+---------------+--------------+
-Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
-
-
-+------------------------------------------------------------+
-; Registers Removed During Synthesis                         ;
-+---------------------------------------+--------------------+
-; Register name                         ; Reason for Removal ;
-+---------------------------------------+--------------------+
-; contador:cin|cuenta_aux[3]            ; Lost fanout        ;
-; Total Number of Removed Registers = 1 ;                    ;
-+---------------------------------------+--------------------+
-
-
-+------------------------------------------------------+
-; General Register Statistics                          ;
-+----------------------------------------------+-------+
-; Statistic                                    ; Value ;
-+----------------------------------------------+-------+
-; Total registers                              ; 11    ;
-; Number of registers using Synchronous Clear  ; 8     ;
-; Number of registers using Synchronous Load   ; 0     ;
-; Number of registers using Asynchronous Clear ; 0     ;
-; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 0     ;
-; Number of registers using Preset             ; 0     ;
-+----------------------------------------------+-------+
-
-
-+----------------------------------------------------------------------------------------------------------------+
-; Port Connectivity Checks: "demultiplexor:dm1"                                                                  ;
-+------+--------+----------+-------------------------------------------------------------------------------------+
-; Port ; Type   ; Severity ; Details                                                                             ;
-+------+--------+----------+-------------------------------------------------------------------------------------+
-; s1   ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-; s2   ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-; s3   ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-; s4   ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-; s5   ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-; s7   ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-; s8   ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-+------+--------+----------+-------------------------------------------------------------------------------------+
-
-
-+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Port Connectivity Checks: "contador:cin"                                                                                                                                                                           ;
-+-----------+--------+----------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Port      ; Type   ; Severity ; Details                                                                                                                                                                            ;
-+-----------+--------+----------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; reset     ; Input  ; Warning  ; Input port expression (32 bits) is wider than the input port (1 bits) it drives.  The 31 most-significant bit(s) in the expression will be dangling if they have no other fanouts. ;
-; reset[-1] ; Input  ; Info     ; Stuck at GND                                                                                                                                                                       ;
-; cuenta    ; Output ; Warning  ; Output or bidir port (4 bits) is wider than the port expression (3 bits) it drives; bit(s) "cuenta[3..3]" have no fanouts                                                          ;
-+-----------+--------+----------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-
-
-+-----------------------------------------------------+
-; Post-Synthesis Netlist Statistics for Top Partition ;
-+-----------------------+-----------------------------+
-; Type                  ; Count                       ;
-+-----------------------+-----------------------------+
-; arriav_ff             ; 11                          ;
-;     SCLR              ; 8                           ;
-;     plain             ; 3                           ;
-; arriav_lcell_comb     ; 5                           ;
-;     normal            ; 5                           ;
-;         0 data inputs ; 1                           ;
-;         1 data inputs ; 1                           ;
-;         2 data inputs ; 1                           ;
-;         3 data inputs ; 2                           ;
-; boundary_port         ; 70                          ;
-;                       ;                             ;
-; Max LUT depth         ; 1.00                        ;
-; Average LUT depth     ; 0.27                        ;
-+-----------------------+-----------------------------+
-
-
-+-------------------------------+
-; Elapsed Time Per Partition    ;
-+----------------+--------------+
-; Partition Name ; Elapsed Time ;
-+----------------+--------------+
-; Top            ; 00:00:01     ;
-+----------------+--------------+
++------------------------------------------+
+; Parallel Compilation                     ;
++----------------------------+-------------+
+; Processors                 ; Number      ;
++----------------------------+-------------+
+; Number detected on machine ; 4           ;
+; Maximum allowed            ; 4           ;
+;                            ;             ;
+; Average used               ; 1.00        ;
+; Maximum used               ; 1           ;
+;                            ;             ;
+; Usage by Processor         ; % Time Used ;
+;     Processor 1            ; 100.0%      ;
++----------------------------+-------------+
 
 
 +-------------------------------+
@@ -301,94 +159,37 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +-------------------------------+
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
-    Info: Version 16.0.0 Build 211 04/27/2016 SJ Lite Edition
-    Info: Processing started: Fri Oct 25 16:46:15 2019
+    Info: Version 18.0.0 Build 614 04/24/2018 SJ Lite Edition
+    Info: Processing started: Fri Oct 25 19:59:17 2019
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Actividad2 -c Actividad2
-Warning (20028): Parallel compilation is not licensed and has been disabled
-Info (12021): Found 1 design units, including 1 entities, in source file a.v
-    Info (12023): Found entity 1: A File: C:/Users/se/Desktop/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/A.v Line: 1
-Info (12021): Found 1 design units, including 1 entities, in source file b.v
-    Info (12023): Found entity 1: B File: C:/Users/se/Desktop/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/B.v Line: 1
-Info (12021): Found 1 design units, including 1 entities, in source file demultiplexor.v
-    Info (12023): Found entity 1: demultiplexor File: C:/Users/se/Desktop/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/Demultiplexor.v Line: 1
-Info (12021): Found 1 design units, including 1 entities, in source file contador.v
-    Info (12023): Found entity 1: contador File: C:/Users/se/Desktop/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/Contador.v Line: 1
-Warning (12125): Using design file actividad2.v, which is not specified as a design file for the current project, but contains definitions for 1 design units and 1 entities in project
-    Info (12023): Found entity 1: Actividad2 File: C:/Users/se/Desktop/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/actividad2.v Line: 5
-Info (12127): Elaborating entity "Actividad2" for the top level hierarchy
-Warning (10034): Output port "HEX0" at actividad2.v(14) has no driver File: C:/Users/se/Desktop/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/actividad2.v Line: 14
-Warning (10034): Output port "HEX1" at actividad2.v(15) has no driver File: C:/Users/se/Desktop/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/actividad2.v Line: 15
-Warning (10034): Output port "HEX2" at actividad2.v(16) has no driver File: C:/Users/se/Desktop/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/actividad2.v Line: 16
-Warning (10034): Output port "HEX3" at actividad2.v(17) has no driver File: C:/Users/se/Desktop/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/actividad2.v Line: 17
-Warning (10034): Output port "HEX4" at actividad2.v(18) has no driver File: C:/Users/se/Desktop/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/actividad2.v Line: 18
-Warning (10034): Output port "HEX5" at actividad2.v(19) has no driver File: C:/Users/se/Desktop/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/actividad2.v Line: 19
-Info (12128): Elaborating entity "contador" for hierarchy "contador:cin" File: C:/Users/se/Desktop/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/actividad2.v Line: 58
-Info (12128): Elaborating entity "demultiplexor" for hierarchy "demultiplexor:dm1" File: C:/Users/se/Desktop/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/actividad2.v Line: 72
-Warning (12241): 1 hierarchies have connectivity warnings - see the Connectivity Checks report folder
-Warning (13024): Output pins are stuck at VCC or GND
-    Warning (13410): Pin "HEX0[0]" is stuck at GND File: C:/Users/se/Desktop/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/actividad2.v Line: 14
-    Warning (13410): Pin "HEX0[1]" is stuck at GND File: C:/Users/se/Desktop/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/actividad2.v Line: 14
-    Warning (13410): Pin "HEX0[2]" is stuck at GND File: C:/Users/se/Desktop/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/actividad2.v Line: 14
-    Warning (13410): Pin "HEX0[3]" is stuck at GND File: C:/Users/se/Desktop/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/actividad2.v Line: 14
-    Warning (13410): Pin "HEX0[4]" is stuck at GND File: C:/Users/se/Desktop/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/actividad2.v Line: 14
-    Warning (13410): Pin "HEX0[5]" is stuck at GND File: C:/Users/se/Desktop/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/actividad2.v Line: 14
-    Warning (13410): Pin "HEX0[6]" is stuck at GND File: C:/Users/se/Desktop/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/actividad2.v Line: 14
-    Warning (13410): Pin "HEX1[0]" is stuck at GND File: C:/Users/se/Desktop/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/actividad2.v Line: 15
-    Warning (13410): Pin "HEX1[1]" is stuck at GND File: C:/Users/se/Desktop/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/actividad2.v Line: 15
-    Warning (13410): Pin "HEX1[2]" is stuck at GND File: C:/Users/se/Desktop/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/actividad2.v Line: 15
-    Warning (13410): Pin "HEX1[3]" is stuck at GND File: C:/Users/se/Desktop/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/actividad2.v Line: 15
-    Warning (13410): Pin "HEX1[4]" is stuck at GND File: C:/Users/se/Desktop/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/actividad2.v Line: 15
-    Warning (13410): Pin "HEX1[5]" is stuck at GND File: C:/Users/se/Desktop/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/actividad2.v Line: 15
-    Warning (13410): Pin "HEX1[6]" is stuck at GND File: C:/Users/se/Desktop/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/actividad2.v Line: 15
-    Warning (13410): Pin "HEX2[0]" is stuck at GND File: C:/Users/se/Desktop/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/actividad2.v Line: 16
-    Warning (13410): Pin "HEX2[1]" is stuck at GND File: C:/Users/se/Desktop/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/actividad2.v Line: 16
-    Warning (13410): Pin "HEX2[2]" is stuck at GND File: C:/Users/se/Desktop/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/actividad2.v Line: 16
-    Warning (13410): Pin "HEX2[3]" is stuck at GND File: C:/Users/se/Desktop/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/actividad2.v Line: 16
-    Warning (13410): Pin "HEX2[4]" is stuck at GND File: C:/Users/se/Desktop/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/actividad2.v Line: 16
-    Warning (13410): Pin "HEX2[5]" is stuck at GND File: C:/Users/se/Desktop/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/actividad2.v Line: 16
-    Warning (13410): Pin "HEX2[6]" is stuck at GND File: C:/Users/se/Desktop/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/actividad2.v Line: 16
-    Warning (13410): Pin "HEX3[0]" is stuck at GND File: C:/Users/se/Desktop/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/actividad2.v Line: 17
-    Warning (13410): Pin "HEX3[1]" is stuck at GND File: C:/Users/se/Desktop/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/actividad2.v Line: 17
-    Warning (13410): Pin "HEX3[2]" is stuck at GND File: C:/Users/se/Desktop/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/actividad2.v Line: 17
-    Warning (13410): Pin "HEX3[3]" is stuck at GND File: C:/Users/se/Desktop/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/actividad2.v Line: 17
-    Warning (13410): Pin "HEX3[4]" is stuck at GND File: C:/Users/se/Desktop/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/actividad2.v Line: 17
-    Warning (13410): Pin "HEX3[5]" is stuck at GND File: C:/Users/se/Desktop/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/actividad2.v Line: 17
-    Warning (13410): Pin "HEX3[6]" is stuck at GND File: C:/Users/se/Desktop/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/actividad2.v Line: 17
-    Warning (13410): Pin "HEX4[0]" is stuck at GND File: C:/Users/se/Desktop/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/actividad2.v Line: 18
-    Warning (13410): Pin "HEX4[1]" is stuck at GND File: C:/Users/se/Desktop/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/actividad2.v Line: 18
-    Warning (13410): Pin "HEX4[2]" is stuck at GND File: C:/Users/se/Desktop/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/actividad2.v Line: 18
-    Warning (13410): Pin "HEX4[3]" is stuck at GND File: C:/Users/se/Desktop/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/actividad2.v Line: 18
-    Warning (13410): Pin "HEX4[4]" is stuck at GND File: C:/Users/se/Desktop/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/actividad2.v Line: 18
-    Warning (13410): Pin "HEX4[5]" is stuck at GND File: C:/Users/se/Desktop/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/actividad2.v Line: 18
-    Warning (13410): Pin "HEX4[6]" is stuck at GND File: C:/Users/se/Desktop/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/actividad2.v Line: 18
-    Warning (13410): Pin "HEX5[0]" is stuck at GND File: C:/Users/se/Desktop/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/actividad2.v Line: 19
-    Warning (13410): Pin "HEX5[1]" is stuck at GND File: C:/Users/se/Desktop/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/actividad2.v Line: 19
-    Warning (13410): Pin "HEX5[2]" is stuck at GND File: C:/Users/se/Desktop/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/actividad2.v Line: 19
-    Warning (13410): Pin "HEX5[3]" is stuck at GND File: C:/Users/se/Desktop/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/actividad2.v Line: 19
-    Warning (13410): Pin "HEX5[4]" is stuck at GND File: C:/Users/se/Desktop/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/actividad2.v Line: 19
-    Warning (13410): Pin "HEX5[5]" is stuck at GND File: C:/Users/se/Desktop/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/actividad2.v Line: 19
-    Warning (13410): Pin "HEX5[6]" is stuck at GND File: C:/Users/se/Desktop/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/actividad2.v Line: 19
-Info (286030): Timing-Driven Synthesis is running
-Info (17049): 1 registers lost all their fanouts during netlist optimizations.
-Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
-    Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
-Warning (21074): Design contains 8 input pin(s) that do not drive logic
-    Warning (15610): No output dependent on input pin "CLOCK2_50" File: C:/Users/se/Desktop/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/actividad2.v Line: 8
-    Warning (15610): No output dependent on input pin "CLOCK3_50" File: C:/Users/se/Desktop/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/actividad2.v Line: 9
-    Warning (15610): No output dependent on input pin "CLOCK4_50" File: C:/Users/se/Desktop/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/actividad2.v Line: 10
-    Warning (15610): No output dependent on input pin "CLOCK_50" File: C:/Users/se/Desktop/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/actividad2.v Line: 11
-    Warning (15610): No output dependent on input pin "KEY[0]" File: C:/Users/se/Desktop/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/actividad2.v Line: 22
-    Warning (15610): No output dependent on input pin "KEY[1]" File: C:/Users/se/Desktop/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/actividad2.v Line: 22
-    Warning (15610): No output dependent on input pin "SW[8]" File: C:/Users/se/Desktop/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/actividad2.v Line: 29
-    Warning (15610): No output dependent on input pin "SW[9]" File: C:/Users/se/Desktop/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/actividad2.v Line: 29
-Info (21057): Implemented 82 device resources after synthesis - the final resource count might be different
-    Info (21058): Implemented 18 input pins
-    Info (21059): Implemented 52 output pins
-    Info (21061): Implemented 12 logic cells
-Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 61 warnings
-    Info: Peak virtual memory: 5012 megabytes
-    Info: Processing ended: Fri Oct 25 16:46:36 2019
-    Info: Elapsed time: 00:00:21
-    Info: Total CPU time (on all processors): 00:00:38
+Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
+Info (20030): Parallel compilation is enabled and will use 4 of the 4 processors detected
+Info (12021): Found 1 design units, including 1 entities, in source file A.v
+    Info (12023): Found entity 1: A File: /home/manuel/Repos/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/A.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file B.v
+    Info (12023): Found entity 1: B File: /home/manuel/Repos/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/B.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file Demultiplexor.v
+    Info (12023): Found entity 1: demultiplexor File: /home/manuel/Repos/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/Demultiplexor.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file Contador.v
+    Info (12023): Found entity 1: contador File: /home/manuel/Repos/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/Contador.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file Registro.v
+    Info (12023): Found entity 1: registro File: /home/manuel/Repos/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/Registro.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file Demultiplexor_1linea.v
+    Info (12023): Found entity 1: demultiplexor_1linea File: /home/manuel/Repos/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/Demultiplexor_1linea.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file Multiplexor.v
+    Info (12023): Found entity 1: multiplexor File: /home/manuel/Repos/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/Multiplexor.v Line: 1
+Error (10137): Verilog HDL Procedural Assignment error at Multiplexor.v(18): object "salida" on left-hand side of assignment must have a variable data type File: /home/manuel/Repos/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/Multiplexor.v Line: 18
+Error (10137): Verilog HDL Procedural Assignment error at Multiplexor.v(19): object "salida" on left-hand side of assignment must have a variable data type File: /home/manuel/Repos/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/Multiplexor.v Line: 19
+Error (10137): Verilog HDL Procedural Assignment error at Multiplexor.v(20): object "salida" on left-hand side of assignment must have a variable data type File: /home/manuel/Repos/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/Multiplexor.v Line: 20
+Error (10137): Verilog HDL Procedural Assignment error at Multiplexor.v(21): object "salida" on left-hand side of assignment must have a variable data type File: /home/manuel/Repos/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/Multiplexor.v Line: 21
+Error (10137): Verilog HDL Procedural Assignment error at Multiplexor.v(22): object "salida" on left-hand side of assignment must have a variable data type File: /home/manuel/Repos/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/Multiplexor.v Line: 22
+Error (10137): Verilog HDL Procedural Assignment error at Multiplexor.v(23): object "salida" on left-hand side of assignment must have a variable data type File: /home/manuel/Repos/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/Multiplexor.v Line: 23
+Error (10137): Verilog HDL Procedural Assignment error at Multiplexor.v(24): object "salida" on left-hand side of assignment must have a variable data type File: /home/manuel/Repos/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/Multiplexor.v Line: 24
+Error (10137): Verilog HDL Procedural Assignment error at Multiplexor.v(25): object "salida" on left-hand side of assignment must have a variable data type File: /home/manuel/Repos/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/Multiplexor.v Line: 25
+Error: Quartus Prime Analysis & Synthesis was unsuccessful. 8 errors, 1 warning
+    Error: Peak virtual memory: 918 megabytes
+    Error: Processing ended: Fri Oct 25 19:59:31 2019
+    Error: Elapsed time: 00:00:14
+    Error: Total CPU time (on all processors): 00:00:33
 
 

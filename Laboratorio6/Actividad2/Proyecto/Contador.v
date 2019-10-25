@@ -1,16 +1,13 @@
 module contador(
-	input reloj, reset,
+	input reloj,
 	output [3:0] cuenta
 );
 
 	reg [3:0] cuenta_aux;
 
-	always @(posedge reloj or posedge reset)
+	always @(posedge reloj)
 	begin
-		if (reset)
-			cuenta_aux <= 4'd0;
-		else
-			cuenta_aux <= cuenta_aux + 4'd1;
+		cuenta_aux <= cuenta_aux + 4'd1;
 	end
 	assign cuenta = cuenta_aux;
 

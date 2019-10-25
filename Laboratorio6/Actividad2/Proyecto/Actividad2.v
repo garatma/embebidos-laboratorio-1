@@ -59,56 +59,100 @@ module Actividad2(
 //  Structural coding
 //=======================================================
 
-//	always @(posedge KEY[3])
-//		begin
+	contador cin(
+		.reloj(KEY[3]),
+		.cuenta(cuenta_in)
+	);
+	
+	demultiplexor dm1(
+		.sel(cuenta_in),
+		.i(SW[7:0]),
+		.s1(n1),
+		.s2(n2),
+		.s3(n3),
+		.s4(n4),
+		.s5(n5),
+		.s6(n6),
+		.s7(n7),
+		.s8(n8)
+	);
 
-			registro r1(
-				.reloj(reloj1),
-				.dato(SW[7:0])
-			);
+	demultiplexor dm2(
+		.sel(cuenta_in),
+		.i(KEY[2]),
+		.s1(reloj1),
+		.s2(reloj2),
+		.s3(reloj3),
+		.s4(reloj4),
+		.s5(reloj5),
+		.s6(reloj6),
+		.s7(reloj7),
+		.s8(reloj8)
+	);
 
-			contador cin(
-				.reloj(KEY[2]),
-				.reset(0),
-				.cuenta(cuenta_in)
-			);
-			
-			contador cout(
-				.reloj(KEY[1]),
-				.reset(0),
-				.cuenta(cuenta_out)
-			);
+	registro r1(
+		.reloj(reloj1),
+		.D(SW[7:0]),
+		.Q(n1)
+	);
+	registro r2(
+		.reloj(reloj2),
+		.D(SW[7:0]),
+		.Q(n2)
+	);
+	registro r3(
+		.reloj(reloj3),
+		.D(SW[7:0]),
+		.Q(n3)
+	);
+	registro r4(
+		.reloj(reloj4),
+		.D(SW[7:0]),
+		.Q(n4)
+	);
+	registro r5(
+		.reloj(reloj5),
+		.D(SW[7:0]),
+		.Q(n5)
+	);
+	registro r6(
+		.reloj(reloj6),
+		.D(SW[7:0]),
+		.Q(n6)
+	);
+	registro r7(
+		.reloj(reloj7),
+		.D(SW[7:0]),
+		.Q(n7)
+	);
+	registro r8(
+		.reloj(reloj8),
+		.D(SW[7:0]),
+		.Q(n8)
+	);
+	
+	contador cout(
+		.reloj(KEY[1]),
+		.cuenta(cuenta_out)
+	);
 
-			demultiplexor dm1(
-				.reloj(KEY[3]),
-				.sel(cuenta),
-				.i(SW[7:0]),
-				.s1(n1),
-				.s2(n2),
-				.s3(n3),
-				.s4(n4),
-				.s5(n5),
-				.s6(n6),
-				.s7(n7),
-				.s8(n8)
-			);
-			
-			demultiplexor dm2(
-				.sel(cuenta),
-				.i(SW[7:0]),
-				.s1(r1),
-				.s2(r2),
-				.s3(r3),
-				.s4(r4),
-				.s5(r5),
-				.s6(r6),
-				.s7(r7),
-				.s8(r8)
-			);
+	multiplexor MS(
+		.sel(cuenta_out),
+		.n1(n1),
+		.n2(n2),
+		.n3(n3),
+		.n4(n4),
+		.n5(n5),
+		.n6(n6),
+		.n7(n7),
+		.n8(n8),
+		.salida(LEDR[7:0])
+	);
 
-			assign LEDR[9] = cuenta[1];
-			assign LEDR[8] = cuenta[0];
-			assign LEDR[7:0] = n6;
+
+	assign LEDR[9] = cuenta[1];
+	assign LEDR[8] = cuenta[0];
+	assign LEDR[7:0] = n6;
 
 //		end
 endmodule

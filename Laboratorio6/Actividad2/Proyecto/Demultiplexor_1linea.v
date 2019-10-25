@@ -1,4 +1,4 @@
-module demultiplexor(reloj, sel, i, s1, s2, s3, s4, s5, s6, s7, s8);
+module demultiplexor_1linea(reloj, sel, i, s1, s2, s3, s4, s5, s6, s7, s8);
 
 	input reloj;
 	input [2:0] sel;
