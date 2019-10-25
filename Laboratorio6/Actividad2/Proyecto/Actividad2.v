@@ -43,7 +43,17 @@ module Actividad2(
 	wire [7:0] n7; 
 	wire [7:0] n8; 
 
-	wire [2:0] cuenta;
+	wire [2:0] cuenta_in;
+	wire [2:0] cuenta_out;
+	
+	wire reloj1;
+	wire reloj2;
+	wire reloj3;
+	wire reloj4;
+	wire reloj5;
+	wire reloj6;
+	wire reloj7;
+	wire reloj8;
 
 //=======================================================
 //  Structural coding
@@ -51,10 +61,22 @@ module Actividad2(
 
 //	always @(posedge KEY[3])
 //		begin
+
+			registro r1(
+				.reloj(reloj1),
+				.dato(SW[7:0])
+			);
+
 			contador cin(
 				.reloj(KEY[2]),
 				.reset(0),
-				.cuenta(cuenta)
+				.cuenta(cuenta_in)
+			);
+			
+			contador cout(
+				.reloj(KEY[1]),
+				.reset(0),
+				.cuenta(cuenta_out)
 			);
 
 			demultiplexor dm1(
@@ -69,6 +91,19 @@ module Actividad2(
 				.s6(n6),
 				.s7(n7),
 				.s8(n8)
+			);
+			
+			demultiplexor dm2(
+				.sel(cuenta),
+				.i(SW[7:0]),
+				.s1(r1),
+				.s2(r2),
+				.s3(r3),
+				.s4(r4),
+				.s5(r5),
+				.s6(r6),
+				.s7(r7),
+				.s8(r8)
 			);
 
 			assign LEDR[9] = cuenta[1];
