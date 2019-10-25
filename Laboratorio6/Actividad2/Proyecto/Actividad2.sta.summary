@@ -2,4 +2,100 @@
 Timing Analyzer Summary
 ------------------------------------------------------------
 
+Type  : Slow 1100mV 85C Model Setup 'KEY[3]'
+Slack : -1.555
+TNS   : -12.420
+
+Type  : Slow 1100mV 85C Model Setup 'KEY[2]'
+Slack : -0.146
+TNS   : -0.307
+
+Type  : Slow 1100mV 85C Model Hold 'KEY[2]'
+Slack : 0.340
+TNS   : 0.000
+
+Type  : Slow 1100mV 85C Model Hold 'KEY[3]'
+Slack : 0.592
+TNS   : 0.000
+
+Type  : Slow 1100mV 85C Model Minimum Pulse Width 'KEY[3]'
+Slack : -0.394
+TNS   : -5.233
+
+Type  : Slow 1100mV 85C Model Minimum Pulse Width 'KEY[2]'
+Slack : -0.394
+TNS   : -3.315
+
+Type  : Slow 1100mV 0C Model Setup 'KEY[3]'
+Slack : -1.552
+TNS   : -12.392
+
+Type  : Slow 1100mV 0C Model Setup 'KEY[2]'
+Slack : -0.177
+TNS   : -0.469
+
+Type  : Slow 1100mV 0C Model Hold 'KEY[2]'
+Slack : 0.314
+TNS   : 0.000
+
+Type  : Slow 1100mV 0C Model Hold 'KEY[3]'
+Slack : 0.549
+TNS   : 0.000
+
+Type  : Slow 1100mV 0C Model Minimum Pulse Width 'KEY[3]'
+Slack : -0.394
+TNS   : -4.840
+
+Type  : Slow 1100mV 0C Model Minimum Pulse Width 'KEY[2]'
+Slack : -0.394
+TNS   : -3.018
+
+Type  : Fast 1100mV 85C Model Setup 'KEY[3]'
+Slack : -0.446
+TNS   : -3.559
+
+Type  : Fast 1100mV 85C Model Setup 'KEY[2]'
+Slack : 0.318
+TNS   : 0.000
+
+Type  : Fast 1100mV 85C Model Hold 'KEY[2]'
+Slack : 0.182
+TNS   : 0.000
+
+Type  : Fast 1100mV 85C Model Hold 'KEY[3]'
+Slack : 0.241
+TNS   : 0.000
+
+Type  : Fast 1100mV 85C Model Minimum Pulse Width 'KEY[2]'
+Slack : -0.396
+TNS   : -2.649
+
+Type  : Fast 1100mV 85C Model Minimum Pulse Width 'KEY[3]'
+Slack : -0.386
+TNS   : -3.834
+
+Type  : Fast 1100mV 0C Model Setup 'KEY[3]'
+Slack : -0.384
+TNS   : -3.067
+
+Type  : Fast 1100mV 0C Model Setup 'KEY[2]'
+Slack : 0.344
+TNS   : 0.000
+
+Type  : Fast 1100mV 0C Model Hold 'KEY[2]'
+Slack : 0.171
+TNS   : 0.000
+
+Type  : Fast 1100mV 0C Model Hold 'KEY[3]'
+Slack : 0.199
+TNS   : 0.000
+
+Type  : Fast 1100mV 0C Model Minimum Pulse Width 'KEY[2]'
+Slack : -0.432
+TNS   : -3.212
+
+Type  : Fast 1100mV 0C Model Minimum Pulse Width 'KEY[3]'
+Slack : -0.427
+TNS   : -4.703
+
 ------------------------------------------------------------

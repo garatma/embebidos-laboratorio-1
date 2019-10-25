@@ -34,7 +34,6 @@ module Actividad2(
 //  REG/WIRE declarations
 //=======================================================
 
-
 	wire [7:0] n1; 
 	wire [7:0] n2; 
 	wire [7:0] n3; 
@@ -44,66 +43,37 @@ module Actividad2(
 	wire [7:0] n7; 
 	wire [7:0] n8; 
 
-//=======================================================
-//  Structural coding
-//=======================================================
-
-	DM1 demultiplexor(
-		.reloj(CLOCK_50),
-		.sel(KEY[2:0]),
-		.i(SW[7:0]),
-		.s1(n1),
-		.s2(n2),
-		.s3(n3),
-		.s4(n4),
-		.s5(n5),
-		.s6(n6),
-		.s7(n7),
-		.s8(n8)
-	);
-
-	DM2 demultiplexor(
-		.reloj(CLOCK_50),
-		.sel(KEY[2:0]),
-		.i(SW[7:0]),
-		.s1(n1),
-		.s2(n2),
-		.s3(n3),
-		.s4(n4),
-		.s5(n5),
-		.s6(n6),
-		.s7(n7),
-		.s8(n8)
-	);
-endmodule
-
-/*
-module Actividad2(
-	input [9:0] SW,
-	output [9:0] LEDR
-);
-
-
-
-//=======================================================
-//  REG/WIRE declarations
-//=======================================================
-
+	wire [2:0] cuenta;
 
 //=======================================================
 //  Structural coding
 //=======================================================
 
-	D d1(
-		.n1(SW[1:0]),
-		.n2(SW[3:2]),
-		.n3(SW[5:4]),
-		.n4(SW[7:6]),
-		.s1(LEDR[1:0]),
-		.s2(LEDR[3:2]),
-		.s3(LEDR[5:4]),
-		.s4(LEDR[7:6]),
-		);
-		
+//	always @(posedge KEY[3])
+//		begin
+			contador cin(
+				.reloj(KEY[2]),
+				.reset(0),
+				.cuenta(cuenta)
+			);
+
+			demultiplexor dm1(
+				.reloj(KEY[3]),
+				.sel(cuenta),
+				.i(SW[7:0]),
+				.s1(n1),
+				.s2(n2),
+				.s3(n3),
+				.s4(n4),
+				.s5(n5),
+				.s6(n6),
+				.s7(n7),
+				.s8(n8)
+			);
+
+			assign LEDR[9] = cuenta[1];
+			assign LEDR[8] = cuenta[0];
+			assign LEDR[7:0] = n6;
+
+//		end
 endmodule
-/*

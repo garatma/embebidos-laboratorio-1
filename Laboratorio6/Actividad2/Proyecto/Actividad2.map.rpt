@@ -1,5 +1,5 @@
 Analysis & Synthesis report for Actividad2
-Fri Oct 25 11:24:28 2019
+Fri Oct 25 16:03:25 2019
 Quartus Prime Version 18.0.0 Build 614 04/24/2018 SJ Lite Edition
 
 
@@ -13,10 +13,13 @@ Quartus Prime Version 18.0.0 Build 614 04/24/2018 SJ Lite Edition
   5. Analysis & Synthesis Source Files Read
   6. Analysis & Synthesis Resource Usage Summary
   7. Analysis & Synthesis Resource Utilization by Entity
-  8. General Register Statistics
-  9. Post-Synthesis Netlist Statistics for Top Partition
- 10. Elapsed Time Per Partition
- 11. Analysis & Synthesis Messages
+  8. Registers Removed During Synthesis
+  9. General Register Statistics
+ 10. Port Connectivity Checks: "demultiplexor:dm1"
+ 11. Port Connectivity Checks: "contador:cin"
+ 12. Post-Synthesis Netlist Statistics for Top Partition
+ 13. Elapsed Time Per Partition
+ 14. Analysis & Synthesis Messages
 
 
 
@@ -42,14 +45,14 @@ refer to the applicable agreement for further details.
 +-------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                  ;
 +---------------------------------+---------------------------------------------+
-; Analysis & Synthesis Status     ; Successful - Fri Oct 25 11:24:28 2019       ;
+; Analysis & Synthesis Status     ; Successful - Fri Oct 25 16:03:25 2019       ;
 ; Quartus Prime Version           ; 18.0.0 Build 614 04/24/2018 SJ Lite Edition ;
 ; Revision Name                   ; Actividad2                                  ;
 ; Top-level Entity Name           ; Actividad2                                  ;
 ; Family                          ; Cyclone V                                   ;
 ; Logic utilization (in ALMs)     ; N/A                                         ;
-; Total registers                 ; 0                                           ;
-; Total pins                      ; 20                                          ;
+; Total registers                 ; 11                                          ;
+; Total pins                      ; 70                                          ;
 ; Total virtual pins              ; 0                                           ;
 ; Total block memory bits         ; 0                                           ;
 ; Total DSP Blocks                ; 0                                           ;
@@ -158,64 +161,73 @@ refer to the applicable agreement for further details.
 ; Maximum allowed            ; 4           ;
 ;                            ;             ;
 ; Average used               ; 1.00        ;
-; Maximum used               ; 1           ;
+; Maximum used               ; 4           ;
 ;                            ;             ;
 ; Usage by Processor         ; % Time Used ;
 ;     Processor 1            ; 100.0%      ;
+;     Processor 2            ;   0.0%      ;
+;     Processors 3-4         ;   0.0%      ;
 +----------------------------+-------------+
 
 
-+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Source Files Read                                                                                                                                                ;
-+----------------------------------+-----------------+------------------------------+-----------------------------------------------------------------------------------------+---------+
-; File Name with User-Entered Path ; Used in Netlist ; File Type                    ; File Name with Absolute Path                                                            ; Library ;
-+----------------------------------+-----------------+------------------------------+-----------------------------------------------------------------------------------------+---------+
-; A.v                              ; yes             ; User Verilog HDL File        ; /home/manuel/Repos/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/A.v          ;         ;
-; Actividad2.v                     ; yes             ; Auto-Found Verilog HDL File  ; /home/manuel/Repos/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/Actividad2.v ;         ;
-; D.v                              ; yes             ; Auto-Found Verilog HDL File  ; /home/manuel/Repos/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/D.v          ;         ;
-+----------------------------------+-----------------+------------------------------+-----------------------------------------------------------------------------------------+---------+
-
-
-+-----------------------------------------------------------+
-; Analysis & Synthesis Resource Usage Summary               ;
-+---------------------------------------------+-------------+
-; Resource                                    ; Usage       ;
-+---------------------------------------------+-------------+
-; Estimate of Logic utilization (ALMs needed) ; 7           ;
-;                                             ;             ;
-; Combinational ALUT usage for logic          ; 14          ;
-;     -- 7 input functions                    ; 0           ;
-;     -- 6 input functions                    ; 0           ;
-;     -- 5 input functions                    ; 4           ;
-;     -- 4 input functions                    ; 8           ;
-;     -- <=3 input functions                  ; 2           ;
-;                                             ;             ;
-; Dedicated logic registers                   ; 0           ;
-;                                             ;             ;
-; I/O pins                                    ; 20          ;
-;                                             ;             ;
-; Total DSP Blocks                            ; 0           ;
-;                                             ;             ;
-; Maximum fan-out node                        ; SW[1]~input ;
-; Maximum fan-out                             ; 10          ;
-; Total fan-out                               ; 84          ;
-; Average fan-out                             ; 1.56        ;
-+---------------------------------------------+-------------+
-
-
 +------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                      ;
-+----------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+-----------------------+-------------+--------------+
-; Compilation Hierarchy Node ; Combinational ALUTs ; Dedicated Logic Registers ; Block Memory Bits ; DSP Blocks ; Pins ; Virtual Pins ; Full Hierarchy Name   ; Entity Name ; Library Name ;
-+----------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+-----------------------+-------------+--------------+
-; |Actividad2                ; 14 (0)              ; 0 (0)                     ; 0                 ; 0          ; 20   ; 0            ; |Actividad2           ; Actividad2  ; work         ;
-;    |D:d1|                  ; 14 (0)              ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Actividad2|D:d1      ; D           ; work         ;
-;       |A:a1|               ; 2 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Actividad2|D:d1|A:a1 ; A           ; work         ;
-;       |A:a2|               ; 4 (4)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Actividad2|D:d1|A:a2 ; A           ; work         ;
-;       |A:a3|               ; 4 (4)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Actividad2|D:d1|A:a3 ; A           ; work         ;
-;       |A:a4|               ; 4 (4)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Actividad2|D:d1|A:a4 ; A           ; work         ;
-+----------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+-----------------------+-------------+--------------+
+; Analysis & Synthesis Source Files Read                                                                                                                                                   ;
++----------------------------------+-----------------+------------------------------+--------------------------------------------------------------------------------------------+---------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type                    ; File Name with Absolute Path                                                               ; Library ;
++----------------------------------+-----------------+------------------------------+--------------------------------------------------------------------------------------------+---------+
+; Demultiplexor.v                  ; yes             ; User Verilog HDL File        ; /home/manuel/Repos/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/Demultiplexor.v ;         ;
+; Contador.v                       ; yes             ; User Verilog HDL File        ; /home/manuel/Repos/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/Contador.v      ;         ;
+; Actividad2.v                     ; yes             ; Auto-Found Verilog HDL File  ; /home/manuel/Repos/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/Actividad2.v    ;         ;
++----------------------------------+-----------------+------------------------------+--------------------------------------------------------------------------------------------+---------+
+
+
++----------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary                                ;
++---------------------------------------------+------------------------------+
+; Resource                                    ; Usage                        ;
++---------------------------------------------+------------------------------+
+; Estimate of Logic utilization (ALMs needed) ; 6                            ;
+;                                             ;                              ;
+; Combinational ALUT usage for logic          ; 4                            ;
+;     -- 7 input functions                    ; 0                            ;
+;     -- 6 input functions                    ; 0                            ;
+;     -- 5 input functions                    ; 0                            ;
+;     -- 4 input functions                    ; 0                            ;
+;     -- <=3 input functions                  ; 4                            ;
+;                                             ;                              ;
+; Dedicated logic registers                   ; 11                           ;
+;                                             ;                              ;
+; I/O pins                                    ; 70                           ;
+;                                             ;                              ;
+; Total DSP Blocks                            ; 0                            ;
+;                                             ;                              ;
+; Maximum fan-out node                        ; demultiplexor:dm1|Decoder0~0 ;
+; Maximum fan-out                             ; 8                            ;
+; Total fan-out                               ; 119                          ;
+; Average fan-out                             ; 0.77                         ;
++---------------------------------------------+------------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                ;
++----------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+-------------------------------+---------------+--------------+
+; Compilation Hierarchy Node ; Combinational ALUTs ; Dedicated Logic Registers ; Block Memory Bits ; DSP Blocks ; Pins ; Virtual Pins ; Full Hierarchy Name           ; Entity Name   ; Library Name ;
++----------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+-------------------------------+---------------+--------------+
+; |Actividad2                ; 4 (0)               ; 11 (0)                    ; 0                 ; 0          ; 70   ; 0            ; |Actividad2                   ; Actividad2    ; work         ;
+;    |contador:cin|          ; 3 (3)               ; 3 (3)                     ; 0                 ; 0          ; 0    ; 0            ; |Actividad2|contador:cin      ; contador      ; work         ;
+;    |demultiplexor:dm1|     ; 1 (1)               ; 8 (8)                     ; 0                 ; 0          ; 0    ; 0            ; |Actividad2|demultiplexor:dm1 ; demultiplexor ; work         ;
++----------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+-------------------------------+---------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
+
+
++------------------------------------------------------------+
+; Registers Removed During Synthesis                         ;
++---------------------------------------+--------------------+
+; Register name                         ; Reason for Removal ;
++---------------------------------------+--------------------+
+; contador:cin|cuenta_aux[3]            ; Lost fanout        ;
+; Total Number of Removed Registers = 1 ;                    ;
++---------------------------------------+--------------------+
 
 
 +------------------------------------------------------+
@@ -223,8 +235,8 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 0     ;
-; Number of registers using Synchronous Clear  ; 0     ;
+; Total registers                              ; 11    ;
+; Number of registers using Synchronous Clear  ; 8     ;
 ; Number of registers using Synchronous Load   ; 0     ;
 ; Number of registers using Asynchronous Clear ; 0     ;
 ; Number of registers using Asynchronous Load  ; 0     ;
@@ -233,21 +245,50 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +----------------------------------------------+-------+
 
 
++----------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "demultiplexor:dm1"                                                                  ;
++------+--------+----------+-------------------------------------------------------------------------------------+
+; Port ; Type   ; Severity ; Details                                                                             ;
++------+--------+----------+-------------------------------------------------------------------------------------+
+; s1   ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; s2   ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; s3   ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; s4   ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; s5   ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; s7   ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; s8   ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "contador:cin"                                                                                                                                                                           ;
++-----------+--------+----------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Port      ; Type   ; Severity ; Details                                                                                                                                                                            ;
++-----------+--------+----------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; reset     ; Input  ; Warning  ; Input port expression (32 bits) is wider than the input port (1 bits) it drives.  The 31 most-significant bit(s) in the expression will be dangling if they have no other fanouts. ;
+; reset[-1] ; Input  ; Info     ; Stuck at GND                                                                                                                                                                       ;
+; cuenta    ; Output ; Warning  ; Output or bidir port (4 bits) is wider than the port expression (3 bits) it drives; bit(s) "cuenta[3..3]" have no fanouts                                                          ;
++-----------+--------+----------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+
 +-----------------------------------------------------+
 ; Post-Synthesis Netlist Statistics for Top Partition ;
 +-----------------------+-----------------------------+
 ; Type                  ; Count                       ;
 +-----------------------+-----------------------------+
-; arriav_lcell_comb     ; 15                          ;
-;     normal            ; 15                          ;
+; arriav_ff             ; 11                          ;
+;     SCLR              ; 8                           ;
+;     plain             ; 3                           ;
+; arriav_lcell_comb     ; 5                           ;
+;     normal            ; 5                           ;
 ;         0 data inputs ; 1                           ;
-;         2 data inputs ; 2                           ;
-;         4 data inputs ; 8                           ;
-;         5 data inputs ; 4                           ;
-; boundary_port         ; 20                          ;
+;         1 data inputs ; 1                           ;
+;         2 data inputs ; 1                           ;
+;         3 data inputs ; 2                           ;
+; boundary_port         ; 70                          ;
 ;                       ;                             ;
-; Max LUT depth         ; 2.00                        ;
-; Average LUT depth     ; 1.74                        ;
+; Max LUT depth         ; 1.00                        ;
+; Average LUT depth     ; 0.27                        ;
 +-----------------------+-----------------------------+
 
 
@@ -256,7 +297,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +----------------+--------------+
 ; Partition Name ; Elapsed Time ;
 +----------------+--------------+
-; Top            ; 00:00:01     ;
+; Top            ; 00:00:00     ;
 +----------------+--------------+
 
 
@@ -266,7 +307,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 18.0.0 Build 614 04/24/2018 SJ Lite Edition
-    Info: Processing started: Fri Oct 25 11:24:09 2019
+    Info: Processing started: Fri Oct 25 16:03:10 2019
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Actividad2 -c Actividad2
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 4 of the 4 processors detected
@@ -274,32 +315,86 @@ Info (12021): Found 1 design units, including 1 entities, in source file A.v
     Info (12023): Found entity 1: A File: /home/manuel/Repos/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/A.v Line: 1
 Info (12021): Found 1 design units, including 1 entities, in source file B.v
     Info (12023): Found entity 1: B File: /home/manuel/Repos/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/B.v Line: 1
-Warning (10275): Verilog HDL Module Instantiation warning at Actividad2.v(75): ignored dangling comma in List of Port Connections File: /home/manuel/Repos/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/Actividad2.v Line: 75
+Info (12021): Found 1 design units, including 1 entities, in source file Demultiplexor.v
+    Info (12023): Found entity 1: demultiplexor File: /home/manuel/Repos/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/Demultiplexor.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file Contador.v
+    Info (12023): Found entity 1: contador File: /home/manuel/Repos/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/Contador.v Line: 1
 Warning (12125): Using design file Actividad2.v, which is not specified as a design file for the current project, but contains definitions for 1 design units and 1 entities in project
-    Info (12023): Found entity 1: Actividad2 File: /home/manuel/Repos/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/Actividad2.v Line: 50
+    Info (12023): Found entity 1: Actividad2 File: /home/manuel/Repos/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/Actividad2.v Line: 5
 Info (12127): Elaborating entity "Actividad2" for the top level hierarchy
-Warning (10034): Output port "LEDR[9..8]" at Actividad2.v(53) has no driver File: /home/manuel/Repos/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/Actividad2.v Line: 53
-Warning (12125): Using design file D.v, which is not specified as a design file for the current project, but contains definitions for 1 design units and 1 entities in project
-    Info (12023): Found entity 1: D File: /home/manuel/Repos/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/D.v Line: 1
-Info (12128): Elaborating entity "D" for hierarchy "D:d1" File: /home/manuel/Repos/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/Actividad2.v Line: 75
-Info (12128): Elaborating entity "A" for hierarchy "D:d1|A:a1" File: /home/manuel/Repos/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/D.v Line: 29
+Warning (10034): Output port "HEX0" at Actividad2.v(14) has no driver File: /home/manuel/Repos/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/Actividad2.v Line: 14
+Warning (10034): Output port "HEX1" at Actividad2.v(15) has no driver File: /home/manuel/Repos/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/Actividad2.v Line: 15
+Warning (10034): Output port "HEX2" at Actividad2.v(16) has no driver File: /home/manuel/Repos/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/Actividad2.v Line: 16
+Warning (10034): Output port "HEX3" at Actividad2.v(17) has no driver File: /home/manuel/Repos/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/Actividad2.v Line: 17
+Warning (10034): Output port "HEX4" at Actividad2.v(18) has no driver File: /home/manuel/Repos/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/Actividad2.v Line: 18
+Warning (10034): Output port "HEX5" at Actividad2.v(19) has no driver File: /home/manuel/Repos/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/Actividad2.v Line: 19
+Info (12128): Elaborating entity "contador" for hierarchy "contador:cin" File: /home/manuel/Repos/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/Actividad2.v Line: 58
+Info (12128): Elaborating entity "demultiplexor" for hierarchy "demultiplexor:dm1" File: /home/manuel/Repos/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/Actividad2.v Line: 72
+Warning (12241): 1 hierarchies have connectivity warnings - see the Connectivity Checks report folder
 Warning (13024): Output pins are stuck at VCC or GND
-    Warning (13410): Pin "LEDR[8]" is stuck at GND File: /home/manuel/Repos/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/Actividad2.v Line: 53
-    Warning (13410): Pin "LEDR[9]" is stuck at GND File: /home/manuel/Repos/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/Actividad2.v Line: 53
+    Warning (13410): Pin "HEX0[0]" is stuck at GND File: /home/manuel/Repos/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/Actividad2.v Line: 14
+    Warning (13410): Pin "HEX0[1]" is stuck at GND File: /home/manuel/Repos/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/Actividad2.v Line: 14
+    Warning (13410): Pin "HEX0[2]" is stuck at GND File: /home/manuel/Repos/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/Actividad2.v Line: 14
+    Warning (13410): Pin "HEX0[3]" is stuck at GND File: /home/manuel/Repos/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/Actividad2.v Line: 14
+    Warning (13410): Pin "HEX0[4]" is stuck at GND File: /home/manuel/Repos/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/Actividad2.v Line: 14
+    Warning (13410): Pin "HEX0[5]" is stuck at GND File: /home/manuel/Repos/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/Actividad2.v Line: 14
+    Warning (13410): Pin "HEX0[6]" is stuck at GND File: /home/manuel/Repos/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/Actividad2.v Line: 14
+    Warning (13410): Pin "HEX1[0]" is stuck at GND File: /home/manuel/Repos/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/Actividad2.v Line: 15
+    Warning (13410): Pin "HEX1[1]" is stuck at GND File: /home/manuel/Repos/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/Actividad2.v Line: 15
+    Warning (13410): Pin "HEX1[2]" is stuck at GND File: /home/manuel/Repos/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/Actividad2.v Line: 15
+    Warning (13410): Pin "HEX1[3]" is stuck at GND File: /home/manuel/Repos/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/Actividad2.v Line: 15
+    Warning (13410): Pin "HEX1[4]" is stuck at GND File: /home/manuel/Repos/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/Actividad2.v Line: 15
+    Warning (13410): Pin "HEX1[5]" is stuck at GND File: /home/manuel/Repos/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/Actividad2.v Line: 15
+    Warning (13410): Pin "HEX1[6]" is stuck at GND File: /home/manuel/Repos/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/Actividad2.v Line: 15
+    Warning (13410): Pin "HEX2[0]" is stuck at GND File: /home/manuel/Repos/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/Actividad2.v Line: 16
+    Warning (13410): Pin "HEX2[1]" is stuck at GND File: /home/manuel/Repos/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/Actividad2.v Line: 16
+    Warning (13410): Pin "HEX2[2]" is stuck at GND File: /home/manuel/Repos/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/Actividad2.v Line: 16
+    Warning (13410): Pin "HEX2[3]" is stuck at GND File: /home/manuel/Repos/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/Actividad2.v Line: 16
+    Warning (13410): Pin "HEX2[4]" is stuck at GND File: /home/manuel/Repos/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/Actividad2.v Line: 16
+    Warning (13410): Pin "HEX2[5]" is stuck at GND File: /home/manuel/Repos/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/Actividad2.v Line: 16
+    Warning (13410): Pin "HEX2[6]" is stuck at GND File: /home/manuel/Repos/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/Actividad2.v Line: 16
+    Warning (13410): Pin "HEX3[0]" is stuck at GND File: /home/manuel/Repos/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/Actividad2.v Line: 17
+    Warning (13410): Pin "HEX3[1]" is stuck at GND File: /home/manuel/Repos/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/Actividad2.v Line: 17
+    Warning (13410): Pin "HEX3[2]" is stuck at GND File: /home/manuel/Repos/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/Actividad2.v Line: 17
+    Warning (13410): Pin "HEX3[3]" is stuck at GND File: /home/manuel/Repos/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/Actividad2.v Line: 17
+    Warning (13410): Pin "HEX3[4]" is stuck at GND File: /home/manuel/Repos/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/Actividad2.v Line: 17
+    Warning (13410): Pin "HEX3[5]" is stuck at GND File: /home/manuel/Repos/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/Actividad2.v Line: 17
+    Warning (13410): Pin "HEX3[6]" is stuck at GND File: /home/manuel/Repos/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/Actividad2.v Line: 17
+    Warning (13410): Pin "HEX4[0]" is stuck at GND File: /home/manuel/Repos/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/Actividad2.v Line: 18
+    Warning (13410): Pin "HEX4[1]" is stuck at GND File: /home/manuel/Repos/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/Actividad2.v Line: 18
+    Warning (13410): Pin "HEX4[2]" is stuck at GND File: /home/manuel/Repos/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/Actividad2.v Line: 18
+    Warning (13410): Pin "HEX4[3]" is stuck at GND File: /home/manuel/Repos/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/Actividad2.v Line: 18
+    Warning (13410): Pin "HEX4[4]" is stuck at GND File: /home/manuel/Repos/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/Actividad2.v Line: 18
+    Warning (13410): Pin "HEX4[5]" is stuck at GND File: /home/manuel/Repos/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/Actividad2.v Line: 18
+    Warning (13410): Pin "HEX4[6]" is stuck at GND File: /home/manuel/Repos/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/Actividad2.v Line: 18
+    Warning (13410): Pin "HEX5[0]" is stuck at GND File: /home/manuel/Repos/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/Actividad2.v Line: 19
+    Warning (13410): Pin "HEX5[1]" is stuck at GND File: /home/manuel/Repos/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/Actividad2.v Line: 19
+    Warning (13410): Pin "HEX5[2]" is stuck at GND File: /home/manuel/Repos/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/Actividad2.v Line: 19
+    Warning (13410): Pin "HEX5[3]" is stuck at GND File: /home/manuel/Repos/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/Actividad2.v Line: 19
+    Warning (13410): Pin "HEX5[4]" is stuck at GND File: /home/manuel/Repos/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/Actividad2.v Line: 19
+    Warning (13410): Pin "HEX5[5]" is stuck at GND File: /home/manuel/Repos/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/Actividad2.v Line: 19
+    Warning (13410): Pin "HEX5[6]" is stuck at GND File: /home/manuel/Repos/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/Actividad2.v Line: 19
 Info (286030): Timing-Driven Synthesis is running
+Info (17049): 1 registers lost all their fanouts during netlist optimizations.
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
-Warning (21074): Design contains 2 input pin(s) that do not drive logic
-    Warning (15610): No output dependent on input pin "SW[8]" File: /home/manuel/Repos/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/Actividad2.v Line: 51
-    Warning (15610): No output dependent on input pin "SW[9]" File: /home/manuel/Repos/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/Actividad2.v Line: 51
-Info (21057): Implemented 34 device resources after synthesis - the final resource count might be different
-    Info (21058): Implemented 10 input pins
-    Info (21059): Implemented 10 output pins
-    Info (21061): Implemented 14 logic cells
-Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 11 warnings
-    Info: Peak virtual memory: 1013 megabytes
-    Info: Processing ended: Fri Oct 25 11:24:28 2019
-    Info: Elapsed time: 00:00:19
-    Info: Total CPU time (on all processors): 00:00:35
+Warning (21074): Design contains 8 input pin(s) that do not drive logic
+    Warning (15610): No output dependent on input pin "CLOCK2_50" File: /home/manuel/Repos/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/Actividad2.v Line: 8
+    Warning (15610): No output dependent on input pin "CLOCK3_50" File: /home/manuel/Repos/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/Actividad2.v Line: 9
+    Warning (15610): No output dependent on input pin "CLOCK4_50" File: /home/manuel/Repos/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/Actividad2.v Line: 10
+    Warning (15610): No output dependent on input pin "CLOCK_50" File: /home/manuel/Repos/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/Actividad2.v Line: 11
+    Warning (15610): No output dependent on input pin "KEY[0]" File: /home/manuel/Repos/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/Actividad2.v Line: 22
+    Warning (15610): No output dependent on input pin "KEY[1]" File: /home/manuel/Repos/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/Actividad2.v Line: 22
+    Warning (15610): No output dependent on input pin "SW[8]" File: /home/manuel/Repos/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/Actividad2.v Line: 29
+    Warning (15610): No output dependent on input pin "SW[9]" File: /home/manuel/Repos/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/Actividad2.v Line: 29
+Info (21057): Implemented 82 device resources after synthesis - the final resource count might be different
+    Info (21058): Implemented 18 input pins
+    Info (21059): Implemented 52 output pins
+    Info (21061): Implemented 12 logic cells
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 61 warnings
+    Info: Peak virtual memory: 1025 megabytes
+    Info: Processing ended: Fri Oct 25 16:03:25 2019
+    Info: Elapsed time: 00:00:15
+    Info: Total CPU time (on all processors): 00:00:33
 
 

@@ -1,6 +1,6 @@
-module demultiplexor(reloj, sel, i, s1, s2, s3, s4, s5, s6, s7, s8)
+module demultiplexor(reloj, sel, i, s1, s2, s3, s4, s5, s6, s7, s8);
 	
-	input reloj;	
+	input reloj;
 	input [2:0] sel;
 	input [7:0] i;
 	output [7:0] s1;
@@ -12,10 +12,19 @@ module demultiplexor(reloj, sel, i, s1, s2, s3, s4, s5, s6, s7, s8)
 	output [7:0] s7;
 	output [7:0] s8;
 
+	reg [7:0] s1;
+	reg [7:0] s2;
+	reg [7:0] s3;
+	reg [7:0] s4;
+	reg [7:0] s5;
+	reg [7:0] s6;
+	reg [7:0] s7;
+	reg [7:0] s8;
+
 	always @(posedge reloj)
 		begin
 			case (sel)
-				2'b000: 
+				3'b000: 
 					begin
 						s1 = i;
 						s2 = 0;
@@ -26,7 +35,7 @@ module demultiplexor(reloj, sel, i, s1, s2, s3, s4, s5, s6, s7, s8)
 						s7 = 0;
 						s8 = 0;
 					end
-				2'b001:
+				3'b001:
 					begin
 						s1 = 0;
 						s2 = i;
@@ -37,7 +46,7 @@ module demultiplexor(reloj, sel, i, s1, s2, s3, s4, s5, s6, s7, s8)
 						s7 = 0;
 						s8 = 0;
 					end
-				2'b010:
+				3'b010:
 					begin
 						s1 = 0;
 						s2 = 0;
@@ -48,7 +57,7 @@ module demultiplexor(reloj, sel, i, s1, s2, s3, s4, s5, s6, s7, s8)
 						s7 = 0;
 						s8 = 0;
 					end
-				2'b011:
+				3'b011:
 					begin
 						s1 = 0;
 						s2 = 0;
@@ -59,7 +68,7 @@ module demultiplexor(reloj, sel, i, s1, s2, s3, s4, s5, s6, s7, s8)
 						s7 = 0;
 						s8 = 0;
 					end
-				2'b100:
+				3'b100:
 					begin
 						s1 = 0;
 						s2 = 0;
@@ -70,7 +79,7 @@ module demultiplexor(reloj, sel, i, s1, s2, s3, s4, s5, s6, s7, s8)
 						s7 = 0;
 						s8 = 0;
 					end
-				2'b101:
+				3'b101:
 					begin
 						s1 = 0;
 						s2 = 0;
@@ -81,7 +90,7 @@ module demultiplexor(reloj, sel, i, s1, s2, s3, s4, s5, s6, s7, s8)
 						s7 = 0;
 						s8 = 0;
 					end
-				2'b110:
+				3'b110:
 					begin
 						s1 = 0;
 						s2 = 0;
@@ -92,7 +101,7 @@ module demultiplexor(reloj, sel, i, s1, s2, s3, s4, s5, s6, s7, s8)
 						s7 = i;
 						s8 = 0;
 					end
-				2'b111:
+				3'b111:
 					begin
 						s1 = 0;
 						s2 = 0;
