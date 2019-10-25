@@ -1,5 +1,5 @@
 Analysis & Synthesis report for Actividad2
-Thu Oct 24 13:39:02 2019
+Fri Oct 25 11:24:28 2019
 Quartus Prime Version 18.0.0 Build 614 04/24/2018 SJ Lite Edition
 
 
@@ -42,7 +42,7 @@ refer to the applicable agreement for further details.
 +-------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                  ;
 +---------------------------------+---------------------------------------------+
-; Analysis & Synthesis Status     ; Successful - Thu Oct 24 13:39:02 2019       ;
+; Analysis & Synthesis Status     ; Successful - Fri Oct 25 11:24:28 2019       ;
 ; Quartus Prime Version           ; 18.0.0 Build 614 04/24/2018 SJ Lite Edition ;
 ; Revision Name                   ; Actividad2                                  ;
 ; Top-level Entity Name           ; Actividad2                                  ;
@@ -171,8 +171,8 @@ refer to the applicable agreement for further details.
 ; File Name with User-Entered Path ; Used in Netlist ; File Type                    ; File Name with Absolute Path                                                            ; Library ;
 +----------------------------------+-----------------+------------------------------+-----------------------------------------------------------------------------------------+---------+
 ; A.v                              ; yes             ; User Verilog HDL File        ; /home/manuel/Repos/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/A.v          ;         ;
-; B.v                              ; yes             ; User Verilog HDL File        ; /home/manuel/Repos/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/B.v          ;         ;
 ; Actividad2.v                     ; yes             ; Auto-Found Verilog HDL File  ; /home/manuel/Repos/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/Actividad2.v ;         ;
+; D.v                              ; yes             ; Auto-Found Verilog HDL File  ; /home/manuel/Repos/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/D.v          ;         ;
 +----------------------------------+-----------------+------------------------------+-----------------------------------------------------------------------------------------+---------+
 
 
@@ -181,11 +181,11 @@ refer to the applicable agreement for further details.
 +---------------------------------------------+-------------+
 ; Resource                                    ; Usage       ;
 +---------------------------------------------+-------------+
-; Estimate of Logic utilization (ALMs needed) ; 11          ;
+; Estimate of Logic utilization (ALMs needed) ; 7           ;
 ;                                             ;             ;
-; Combinational ALUT usage for logic          ; 18          ;
+; Combinational ALUT usage for logic          ; 14          ;
 ;     -- 7 input functions                    ; 0           ;
-;     -- 6 input functions                    ; 4           ;
+;     -- 6 input functions                    ; 0           ;
 ;     -- 5 input functions                    ; 4           ;
 ;     -- 4 input functions                    ; 8           ;
 ;     -- <=3 input functions                  ; 2           ;
@@ -197,9 +197,9 @@ refer to the applicable agreement for further details.
 ; Total DSP Blocks                            ; 0           ;
 ;                                             ;             ;
 ; Maximum fan-out node                        ; SW[1]~input ;
-; Maximum fan-out                             ; 14          ;
-; Total fan-out                               ; 108         ;
-; Average fan-out                             ; 1.86        ;
+; Maximum fan-out                             ; 10          ;
+; Total fan-out                               ; 84          ;
+; Average fan-out                             ; 1.56        ;
 +---------------------------------------------+-------------+
 
 
@@ -208,14 +208,12 @@ refer to the applicable agreement for further details.
 +----------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+-----------------------+-------------+--------------+
 ; Compilation Hierarchy Node ; Combinational ALUTs ; Dedicated Logic Registers ; Block Memory Bits ; DSP Blocks ; Pins ; Virtual Pins ; Full Hierarchy Name   ; Entity Name ; Library Name ;
 +----------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+-----------------------+-------------+--------------+
-; |Actividad2                ; 18 (0)              ; 0 (0)                     ; 0                 ; 0          ; 20   ; 0            ; |Actividad2           ; Actividad2  ; work         ;
-;    |B:b1|                  ; 18 (0)              ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Actividad2|B:b1      ; B           ; work         ;
-;       |A:a1|               ; 2 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Actividad2|B:b1|A:a1 ; A           ; work         ;
-;       |A:a2|               ; 4 (4)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Actividad2|B:b1|A:a2 ; A           ; work         ;
-;       |A:a3|               ; 2 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Actividad2|B:b1|A:a3 ; A           ; work         ;
-;       |A:a4|               ; 2 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Actividad2|B:b1|A:a4 ; A           ; work         ;
-;       |A:a5|               ; 4 (4)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Actividad2|B:b1|A:a5 ; A           ; work         ;
-;       |A:a6|               ; 4 (4)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Actividad2|B:b1|A:a6 ; A           ; work         ;
+; |Actividad2                ; 14 (0)              ; 0 (0)                     ; 0                 ; 0          ; 20   ; 0            ; |Actividad2           ; Actividad2  ; work         ;
+;    |D:d1|                  ; 14 (0)              ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Actividad2|D:d1      ; D           ; work         ;
+;       |A:a1|               ; 2 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Actividad2|D:d1|A:a1 ; A           ; work         ;
+;       |A:a2|               ; 4 (4)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Actividad2|D:d1|A:a2 ; A           ; work         ;
+;       |A:a3|               ; 4 (4)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Actividad2|D:d1|A:a3 ; A           ; work         ;
+;       |A:a4|               ; 4 (4)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Actividad2|D:d1|A:a4 ; A           ; work         ;
 +----------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+-----------------------+-------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
@@ -240,17 +238,16 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +-----------------------+-----------------------------+
 ; Type                  ; Count                       ;
 +-----------------------+-----------------------------+
-; arriav_lcell_comb     ; 19                          ;
-;     normal            ; 19                          ;
+; arriav_lcell_comb     ; 15                          ;
+;     normal            ; 15                          ;
 ;         0 data inputs ; 1                           ;
 ;         2 data inputs ; 2                           ;
 ;         4 data inputs ; 8                           ;
 ;         5 data inputs ; 4                           ;
-;         6 data inputs ; 4                           ;
 ; boundary_port         ; 20                          ;
 ;                       ;                             ;
-; Max LUT depth         ; 3.00                        ;
-; Average LUT depth     ; 2.59                        ;
+; Max LUT depth         ; 2.00                        ;
+; Average LUT depth     ; 1.74                        ;
 +-----------------------+-----------------------------+
 
 
@@ -259,7 +256,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +----------------+--------------+
 ; Partition Name ; Elapsed Time ;
 +----------------+--------------+
-; Top            ; 00:00:00     ;
+; Top            ; 00:00:01     ;
 +----------------+--------------+
 
 
@@ -269,7 +266,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 18.0.0 Build 614 04/24/2018 SJ Lite Edition
-    Info: Processing started: Thu Oct 24 13:38:47 2019
+    Info: Processing started: Fri Oct 25 11:24:09 2019
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Actividad2 -c Actividad2
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 4 of the 4 processors detected
@@ -282,8 +279,10 @@ Warning (12125): Using design file Actividad2.v, which is not specified as a des
     Info (12023): Found entity 1: Actividad2 File: /home/manuel/Repos/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/Actividad2.v Line: 50
 Info (12127): Elaborating entity "Actividad2" for the top level hierarchy
 Warning (10034): Output port "LEDR[9..8]" at Actividad2.v(53) has no driver File: /home/manuel/Repos/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/Actividad2.v Line: 53
-Info (12128): Elaborating entity "B" for hierarchy "B:b1" File: /home/manuel/Repos/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/Actividad2.v Line: 75
-Info (12128): Elaborating entity "A" for hierarchy "B:b1|A:a1" File: /home/manuel/Repos/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/B.v Line: 35
+Warning (12125): Using design file D.v, which is not specified as a design file for the current project, but contains definitions for 1 design units and 1 entities in project
+    Info (12023): Found entity 1: D File: /home/manuel/Repos/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/D.v Line: 1
+Info (12128): Elaborating entity "D" for hierarchy "D:d1" File: /home/manuel/Repos/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/Actividad2.v Line: 75
+Info (12128): Elaborating entity "A" for hierarchy "D:d1|A:a1" File: /home/manuel/Repos/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/D.v Line: 29
 Warning (13024): Output pins are stuck at VCC or GND
     Warning (13410): Pin "LEDR[8]" is stuck at GND File: /home/manuel/Repos/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/Actividad2.v Line: 53
     Warning (13410): Pin "LEDR[9]" is stuck at GND File: /home/manuel/Repos/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/Actividad2.v Line: 53
@@ -293,14 +292,14 @@ Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
 Warning (21074): Design contains 2 input pin(s) that do not drive logic
     Warning (15610): No output dependent on input pin "SW[8]" File: /home/manuel/Repos/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/Actividad2.v Line: 51
     Warning (15610): No output dependent on input pin "SW[9]" File: /home/manuel/Repos/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/Actividad2.v Line: 51
-Info (21057): Implemented 38 device resources after synthesis - the final resource count might be different
+Info (21057): Implemented 34 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 10 input pins
     Info (21059): Implemented 10 output pins
-    Info (21061): Implemented 18 logic cells
-Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 10 warnings
-    Info: Peak virtual memory: 1010 megabytes
-    Info: Processing ended: Thu Oct 24 13:39:02 2019
-    Info: Elapsed time: 00:00:15
-    Info: Total CPU time (on all processors): 00:00:33
+    Info (21061): Implemented 14 logic cells
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 11 warnings
+    Info: Peak virtual memory: 1013 megabytes
+    Info: Processing ended: Fri Oct 25 11:24:28 2019
+    Info: Elapsed time: 00:00:19
+    Info: Total CPU time (on all processors): 00:00:35
 
 
