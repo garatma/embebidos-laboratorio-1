@@ -1,16 +1,17 @@
-module multiplexor (
-	input [2:0] sel,
-	input [7:0] n1,
-	input [7:0] n2,
-	input [7:0] n3,
-	input [7:0] n4,
-	input [7:0] n5,
-	input [7:0] n6,
-	input [7:0] n7,
-	input [7:0] n8,
-	output [7:0] salida);
+module multiplexor(sel, n1, n2, n3, n4, n5, n6, n7, n8, salida); 
 
-	// reg [7:0] salida;
+	input [2:0] sel;
+	input [7:0] n1;
+	input [7:0] n2;
+	input [7:0] n3;
+	input [7:0] n4;
+	input [7:0] n5;
+	input [7:0] n6;
+	input [7:0] n7;
+	input [7:0] n8;
+	output [7:0] salida;
+
+	reg [7:0] salida;
 
 	always @*
 		begin

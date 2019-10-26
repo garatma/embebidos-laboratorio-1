@@ -1,6 +1,6 @@
 module registro(reloj, D, Q);
 
-	input [7:0] reloj;
+	input reloj;
 	input [7:0] D;
 	output [7:0] Q;
 	reg [7:0] Q;

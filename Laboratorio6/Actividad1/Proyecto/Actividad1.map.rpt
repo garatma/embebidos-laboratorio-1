@@ -1,5 +1,5 @@
 Analysis & Synthesis report for Actividad1
-Thu Oct 24 11:01:02 2019
+Fri Oct 25 22:32:26 2019
 Quartus Prime Version 18.0.0 Build 614 04/24/2018 SJ Lite Edition
 
 
@@ -43,7 +43,7 @@ refer to the applicable agreement for further details.
 +-------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                  ;
 +---------------------------------+---------------------------------------------+
-; Analysis & Synthesis Status     ; Successful - Thu Oct 24 11:01:02 2019       ;
+; Analysis & Synthesis Status     ; Successful - Fri Oct 25 22:32:26 2019       ;
 ; Quartus Prime Version           ; 18.0.0 Build 614 04/24/2018 SJ Lite Edition ;
 ; Revision Name                   ; Actividad1                                  ;
 ; Top-level Entity Name           ; Actividad1                                  ;
@@ -156,15 +156,14 @@ refer to the applicable agreement for further details.
 ; Processors                 ; Number      ;
 +----------------------------+-------------+
 ; Number detected on machine ; 4           ;
-; Maximum allowed            ; 4           ;
+; Maximum allowed            ; 2           ;
 ;                            ;             ;
 ; Average used               ; 1.00        ;
-; Maximum used               ; 4           ;
+; Maximum used               ; 2           ;
 ;                            ;             ;
 ; Usage by Processor         ; % Time Used ;
 ;     Processor 1            ; 100.0%      ;
 ;     Processor 2            ;   0.0%      ;
-;     Processors 3-4         ;   0.0%      ;
 +----------------------------+-------------+
 
 
@@ -279,10 +278,10 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 18.0.0 Build 614 04/24/2018 SJ Lite Edition
-    Info: Processing started: Thu Oct 24 11:00:42 2019
+    Info: Processing started: Fri Oct 25 22:32:03 2019
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Actividad1 -c Actividad1
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
-Info (20030): Parallel compilation is enabled and will use 4 of the 4 processors detected
+Info (20030): Parallel compilation is enabled and will use 2 of the 2 processors detected
 Info (12021): Found 1 design units, including 1 entities, in source file Multiplexor.v
     Info (12023): Found entity 1: multiplexor File: /home/manuel/Repos/laboratorios-embebidos/Laboratorio6/Actividad1/Proyecto/Multiplexor.v Line: 1
 Info (12021): Found 1 design units, including 1 entities, in source file Temporizador.v
@@ -318,9 +317,9 @@ Info (21057): Implemented 57 device resources after synthesis - the final resour
     Info (21059): Implemented 10 output pins
     Info (21061): Implemented 36 logic cells
 Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 20 warnings
-    Info: Peak virtual memory: 1021 megabytes
-    Info: Processing ended: Thu Oct 24 11:01:02 2019
-    Info: Elapsed time: 00:00:20
-    Info: Total CPU time (on all processors): 00:00:38
+    Info: Peak virtual memory: 992 megabytes
+    Info: Processing ended: Fri Oct 25 22:32:26 2019
+    Info: Elapsed time: 00:00:23
+    Info: Total CPU time (on all processors): 00:00:48
 
 

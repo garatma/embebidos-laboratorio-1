@@ -3,20 +3,10 @@
 //=======================================================
 
 module Actividad2(
-
-	//////////// CLOCK //////////
-	input 		          		CLOCK2_50,
-	input 		          		CLOCK3_50,
-	input 		          		CLOCK4_50,
-	input 		          		CLOCK_50,
-
 	//////////// SEG7 //////////
 	output		     [6:0]		HEX0,
 	output		     [6:0]		HEX1,
 	output		     [6:0]		HEX2,
-	output		     [6:0]		HEX3,
-	output		     [6:0]		HEX4,
-	output		     [6:0]		HEX5,
 
 	//////////// KEY //////////
 	input 		     [3:0]		KEY,
@@ -25,7 +15,7 @@ module Actividad2(
 	output		     [9:0]		LEDR,
 
 	//////////// SW //////////
-	input 		     [9:0]		SW
+	input 		     [7:0]		SW
 );
 
 
@@ -43,6 +33,24 @@ module Actividad2(
 	wire [7:0] n7; 
 	wire [7:0] n8; 
 
+	wire [7:0] s1; 
+	wire [7:0] s2; 
+	wire [7:0] s3; 
+	wire [7:0] s4; 
+	wire [7:0] s5; 
+	wire [7:0] s6; 
+	wire [7:0] s7; 
+	wire [7:0] s8; 
+
+	wire [7:0] q1; 
+	wire [7:0] q2; 
+	wire [7:0] q3; 
+	wire [7:0] q4; 
+	wire [7:0] q5; 
+	wire [7:0] q6; 
+	wire [7:0] q7; 
+	wire [7:0] q8; 
+
 	wire [2:0] cuenta_in;
 	wire [2:0] cuenta_out;
 	
@@ -54,6 +62,12 @@ module Actividad2(
 	wire reloj6;
 	wire reloj7;
 	wire reloj8;
+
+	wire [7:0] leds;
+
+	wire [3:0] centenas;
+	wire [3:0] decenas;
+	wire [3:0] unidades;
 
 //=======================================================
 //  Structural coding
@@ -77,7 +91,7 @@ module Actividad2(
 		.s8(n8)
 	);
 
-	demultiplexor dm2(
+	demultiplexor_1linea dm2(
 		.sel(cuenta_in),
 		.i(KEY[2]),
 		.s1(reloj1),
@@ -90,47 +104,77 @@ module Actividad2(
 		.s8(reloj8)
 	);
 
+	assign LEDR[0] = reloj1;
+	assign LEDR[1] = reloj2;
+	assign LEDR[2] = reloj3;
+	assign LEDR[3] = reloj4;
+	assign LEDR[4] = reloj5;
+	assign LEDR[5] = reloj6;
+	assign LEDR[6] = reloj7;
+	assign LEDR[7] = reloj8;
+	assign LEDR[8] = KEY[2];
+	assign LEDR[9] = KEY[3];
+
 	registro r1(
 		.reloj(reloj1),
-		.D(SW[7:0]),
-		.Q(n1)
+		.D(n1),
+		.Q(q1)
 	);
 	registro r2(
 		.reloj(reloj2),
-		.D(SW[7:0]),
-		.Q(n2)
+		.D(n2),
+		.Q(q2)
 	);
 	registro r3(
 		.reloj(reloj3),
-		.D(SW[7:0]),
-		.Q(n3)
+		.D(n3),
+		.Q(q3)
 	);
 	registro r4(
 		.reloj(reloj4),
-		.D(SW[7:0]),
-		.Q(n4)
+		.D(n4),
+		.Q(q4)
 	);
 	registro r5(
 		.reloj(reloj5),
-		.D(SW[7:0]),
-		.Q(n5)
+		.D(n5),
+		.Q(q5)
 	);
 	registro r6(
 		.reloj(reloj6),
-		.D(SW[7:0]),
-		.Q(n6)
+		.D(n6),
+		.Q(q6)
 	);
 	registro r7(
 		.reloj(reloj7),
-		.D(SW[7:0]),
-		.Q(n7)
+		.D(n7),
+		.Q(q7)
 	);
 	registro r8(
 		.reloj(reloj8),
-		.D(SW[7:0]),
-		.Q(n8)
+		.D(n8),
+		.Q(q8)
 	);
-	
+
+	C c1(
+		.n1(q1),
+		.n2(q2),
+		.n3(q3),
+		.n4(q4),
+		.n5(q5),
+		.n6(q6),
+		.n7(q7),
+		.n8(q8),
+		.s1(s1),
+		.s2(s2),
+		.s3(s3),
+		.s4(s4),
+		.s5(s5),
+		.s6(s6),
+		.s7(s7),
+		.s8(s8)
+	);	
+
 	contador cout(
 		.reloj(KEY[1]),
 		.cuenta(cuenta_out)
@@ -138,21 +182,54 @@ module Actividad2(
 
 	multiplexor MS(
 		.sel(cuenta_out),
-		.n1(n1),
-		.n2(n2),
-		.n3(n3),
-		.n4(n4),
-		.n5(n5),
-		.n6(n6),
-		.n7(n7),
-		.n8(n8),
-		.salida(LEDR[7:0])
+		.n1(s1),
+		.n2(s2),
+		.n3(s3),
+		.n4(s4),
+		.n5(s5),
+		.n6(s6),
+		.n7(s7),
+		.n8(s8),
+		.salida(leds)
 	);
 
+	assign centenas[3] = 0;
+	assign centenas[2] = 0;
 
-	assign LEDR[9] = cuenta[1];
-	assign LEDR[8] = cuenta[0];
-	assign LEDR[7:0] = n6;
+	bin2bcd b2b1(
+		.b7(leds[7]),
+		.b6(leds[6]),
+		.b5(leds[5]),
+		.b4(leds[4]),
+		.b3(leds[3]),
+		.b2(leds[2]),
+		.b1(leds[1]),
+		.b0(leds[0]),
+		.p9(centenas[1]),
+		.p8(centenas[0]),
+		.p7(decenas[3]),
+		.p6(decenas[2]),
+		.p5(decenas[1]),
+		.p4(decenas[0]),
+		.p3(unidades[3]),
+		.p2(unidades[2]),
+		.p1(unidades[1]),
+		.p0(unidades[0])
+	);
 
-//		end
+	bcd2hex b2h1(
+		.bcd(centenas),
+		.seg(HEX2)
+	);
+
+	bcd2hex b2h2(
+		.bcd(decenas),
+		.seg(HEX1)
+	);
+
+	bcd2hex b2h3(
+		.bcd(unidades),
+		.seg(HEX0)
+	);
+
 endmodule

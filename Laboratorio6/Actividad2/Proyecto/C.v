@@ -1,4 +1,4 @@
-module B(n1, n2, n3, n4,
+module C(n1, n2, n3, n4,
 	     n5, n6, n7, n8,
 		 s1, s2, s3, s4,
 	 	 s5, s6, s7, s8);
@@ -103,7 +103,7 @@ module B(n1, n2, n3, n4,
 		 .s3(s3),
 		 .s4(s4)
 		);
-	D d1(
+	D d2(
 		 .n1(a4_2),
 		 .n2(a3_2),
 		 .n3(a2_2),

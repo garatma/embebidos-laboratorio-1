@@ -1,14 +1,17 @@
 module contador(
 	input reloj,
-	output [3:0] cuenta
+	output [2:0] cuenta
 );
 
-	reg [3:0] cuenta_aux;
+	reg [2:0] registro_cuenta;
 
 	always @(posedge reloj)
-	begin
-		cuenta_aux <= cuenta_aux + 4'd1;
-	end
-	assign cuenta = cuenta_aux;
+		begin
+			if (registro_cuenta < 3'b111)
+				registro_cuenta <= registro_cuenta + 3'b001;
+			else
+				registro_cuenta = 3'b000;
+		end
+	assign cuenta = registro_cuenta;
 
 endmodule
