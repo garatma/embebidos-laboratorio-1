@@ -9,6 +9,6 @@ module multiplexor (
 	input sel;
 	output[3:0] result;
 
-	result = sel ? datax : data0x;
+	assign result = sel ? data1x : data0x;
 
 endmodule
