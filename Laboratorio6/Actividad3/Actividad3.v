@@ -20,14 +20,13 @@ module Actividad3(
 	//////////// SW //////////
 	input 		     [9:0]		SW
 );
-
-	sopc sopc1(
-		.clk_clk(CLOCK_50),
-		.pio_in_export(SW[7:0]),
-		.pio_out_export(LEDR[7:0]),
-		.reset_reset_n(KEY[0])
-	);
 	
+	sopc sopc1(
+		.clock_clk(CLOCK_50),
+		.in_export(SW[7:0]),
+		.out_export(LEDR[7:0]),
+		.reset_reset_n(KEY[0]),
+	);
 
 
 //=======================================================

@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <preferences>
  <debug showDebugMenu="0" />
- <systemtable filter="All Interfaces">
+ <systemtable filter="All Interfaces" showClockDomains="0" showResetDomains="0">
   <columns>
    <connections preferredWidth="143" />
    <irq preferredWidth="34" />
-   <name preferredWidth="224" />
+   <name preferredWidth="176" />
   </columns>
  </systemtable>
- <library
-   expandedCategories="Library/Basic Functions/Simulation; Debug and Verification,Library,Library/Basic Functions/Simulation; Debug and Verification/Debug and Performance,Project,Library/Basic Functions" />
- <window width="1924" height="1054" x="-2" y="-2" />
- <generation path="sopc" />
+ <library expandedCategories="Library,Project" />
+ <window width="974" height="1050" x="946" y="0" />
+ <generation path="_PROJECT_NAME_" />
 </preferences>
