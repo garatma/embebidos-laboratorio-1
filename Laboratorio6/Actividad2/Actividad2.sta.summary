@@ -3,87 +3,87 @@ Timing Analyzer Summary
 ------------------------------------------------------------
 
 Type  : Slow 1100mV 85C Model Setup 'KEY[2]'
-Slack : -4.613
-TNS   : -278.412
-
-Type  : Slow 1100mV 85C Model Setup 'KEY[1]'
-Slack : -0.194
-TNS   : -0.585
+Slack : -3.530
+TNS   : -211.856
 
 Type  : Slow 1100mV 85C Model Setup 'KEY[3]'
-Slack : -0.155
-TNS   : -0.297
+Slack : -0.165
+TNS   : -0.476
+
+Type  : Slow 1100mV 85C Model Setup 'KEY[1]'
+Slack : -0.114
+TNS   : -0.401
 
 Type  : Slow 1100mV 85C Model Hold 'KEY[1]'
-Slack : 0.322
+Slack : 0.325
 TNS   : 0.000
 
 Type  : Slow 1100mV 85C Model Hold 'KEY[3]'
-Slack : 0.436
+Slack : 0.434
 TNS   : 0.000
 
 Type  : Slow 1100mV 85C Model Hold 'KEY[2]'
-Slack : 2.228
+Slack : 1.334
 TNS   : 0.000
 
 Type  : Slow 1100mV 85C Model Minimum Pulse Width 'KEY[2]'
-Slack : -0.526
-TNS   : -56.185
+Slack : -0.622
+TNS   : -61.915
 
 Type  : Slow 1100mV 85C Model Minimum Pulse Width 'KEY[1]'
-Slack : -0.520
-TNS   : -3.787
+Slack : -0.524
+TNS   : -4.714
 
 Type  : Slow 1100mV 85C Model Minimum Pulse Width 'KEY[3]'
 Slack : -0.394
-TNS   : -1.968
+TNS   : -2.001
 
 Type  : Slow 1100mV 0C Model Setup 'KEY[2]'
-Slack : -4.505
-TNS   : -273.716
-
-Type  : Slow 1100mV 0C Model Setup 'KEY[1]'
-Slack : -0.228
-TNS   : -0.736
+Slack : -3.638
+TNS   : -215.016
 
 Type  : Slow 1100mV 0C Model Setup 'KEY[3]'
 Slack : -0.196
-TNS   : -0.420
+TNS   : -0.580
+
+Type  : Slow 1100mV 0C Model Setup 'KEY[1]'
+Slack : -0.132
+TNS   : -0.587
 
 Type  : Slow 1100mV 0C Model Hold 'KEY[1]'
-Slack : 0.303
+Slack : 0.302
 TNS   : 0.000
 
 Type  : Slow 1100mV 0C Model Hold 'KEY[3]'
-Slack : 0.447
+Slack : 0.446
 TNS   : 0.000
 
 Type  : Slow 1100mV 0C Model Hold 'KEY[2]'
-Slack : 2.195
+Slack : 1.366
 TNS   : 0.000
 
 Type  : Slow 1100mV 0C Model Minimum Pulse Width 'KEY[2]'
-Slack : -0.622
-TNS   : -63.037
+Slack : -0.702
+TNS   : -67.076
 
 Type  : Slow 1100mV 0C Model Minimum Pulse Width 'KEY[1]'
-Slack : -0.500
-TNS   : -3.767
+Slack : -0.501
+TNS   : -4.658
 
 Type  : Slow 1100mV 0C Model Minimum Pulse Width 'KEY[3]'
 Slack : -0.394
-TNS   : -1.839
+TNS   : -1.861
 
 Type  : Fast 1100mV 85C Model Setup 'KEY[2]'
-Slack : -2.509
-TNS   : -139.079
-
-Type  : Fast 1100mV 85C Model Setup 'KEY[1]'
-Slack : 0.289
-TNS   : 0.000
+Slack : -2.053
+TNS   : -119.904
 
 Type  : Fast 1100mV 85C Model Setup 'KEY[3]'
-Slack : 0.296
+Slack : 0.286
+TNS   : 0.000
+
+Type  : Fast 1100mV 85C Model Setup 'KEY[1]'
+Slack : 0.346
 TNS   : 0.000
 
 Type  : Fast 1100mV 85C Model Hold 'KEY[1]'
@@ -91,59 +91,59 @@ Slack : 0.184
 TNS   : 0.000
 
 Type  : Fast 1100mV 85C Model Hold 'KEY[3]'
-Slack : 0.200
+Slack : 0.199
 TNS   : 0.000
 
 Type  : Fast 1100mV 85C Model Hold 'KEY[2]'
-Slack : 0.878
+Slack : 0.786
 TNS   : 0.000
 
 Type  : Fast 1100mV 85C Model Minimum Pulse Width 'KEY[2]'
-Slack : -0.756
-TNS   : -70.244
+Slack : -0.775
+TNS   : -73.308
 
 Type  : Fast 1100mV 85C Model Minimum Pulse Width 'KEY[1]'
-Slack : -0.632
-TNS   : -4.597
+Slack : -0.635
+TNS   : -5.542
 
 Type  : Fast 1100mV 85C Model Minimum Pulse Width 'KEY[3]'
-Slack : -0.390
-TNS   : -1.747
+Slack : -0.396
+TNS   : -1.767
 
 Type  : Fast 1100mV 0C Model Setup 'KEY[2]'
-Slack : -2.100
-TNS   : -117.159
-
-Type  : Fast 1100mV 0C Model Setup 'KEY[1]'
-Slack : 0.315
-TNS   : 0.000
+Slack : -1.805
+TNS   : -106.666
 
 Type  : Fast 1100mV 0C Model Setup 'KEY[3]'
-Slack : 0.343
+Slack : 0.335
+TNS   : 0.000
+
+Type  : Fast 1100mV 0C Model Setup 'KEY[1]'
+Slack : 0.369
 TNS   : 0.000
 
 Type  : Fast 1100mV 0C Model Hold 'KEY[1]'
-Slack : 0.171
+Slack : 0.168
 TNS   : 0.000
 
 Type  : Fast 1100mV 0C Model Hold 'KEY[3]'
-Slack : 0.190
+Slack : 0.189
 TNS   : 0.000
 
 Type  : Fast 1100mV 0C Model Hold 'KEY[2]'
-Slack : 0.701
+Slack : 0.726
 TNS   : 0.000
 
 Type  : Fast 1100mV 0C Model Minimum Pulse Width 'KEY[2]'
-Slack : -0.802
-TNS   : -77.767
+Slack : -0.830
+TNS   : -81.292
 
 Type  : Fast 1100mV 0C Model Minimum Pulse Width 'KEY[1]'
-Slack : -0.658
-TNS   : -4.954
+Slack : -0.661
+TNS   : -5.955
 
 Type  : Fast 1100mV 0C Model Minimum Pulse Width 'KEY[3]'
-Slack : -0.430
-TNS   : -2.165
+Slack : -0.433
+TNS   : -2.176
 
 ------------------------------------------------------------

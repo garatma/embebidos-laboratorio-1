@@ -1,1 +1,1 @@
-Warning (10268): Verilog HDL information at Contador.v(8): always construct contains both blocking and non-blocking assignments File: /home/manuel/Repos/laboratorios-embebidos/Laboratorio6/Actividad2/Proyecto/Contador.v Line: 8
+Warning (10268): Verilog HDL information at Contador.v(8): always construct contains both blocking and non-blocking assignments File: /home/manuel/Repos/laboratorios-embebidos/Laboratorio6/Actividad2/Contador.v Line: 8

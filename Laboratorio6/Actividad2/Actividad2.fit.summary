@@ -1,12 +1,12 @@
-Fitter Status : Successful - Sat Oct 26 17:18:11 2019
+Fitter Status : Successful - Mon Nov  4 18:40:32 2019
 Quartus Prime Version : 18.0.0 Build 614 04/24/2018 SJ Lite Edition
 Revision Name : Actividad2
 Top-level Entity Name : Actividad2
 Family : Cyclone V
 Device : 5CSEMA5F31C6
 Timing Models : Final
-Logic utilization (in ALMs) : 420 / 32,070 ( 1 % )
-Total registers : 71
+Logic utilization (in ALMs) : 418 / 32,070 ( 1 % )
+Total registers : 72
 Total pins : 43 / 457 ( 9 % )
 Total virtual pins : 0
 Total block memory bits : 0 / 4,065,280 ( 0 % )
